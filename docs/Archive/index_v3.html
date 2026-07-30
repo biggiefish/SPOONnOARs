@@ -714,7 +714,6 @@ footer.tyee-footer{
 #sec-catch .card{ background:var(--white-ink); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px; }
 #sec-catch .card h3{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 4px; color:var(--ink); }
 #sec-catch .card .note{ color:var(--sage); font-size:13px; margin:0 0 16px; }
-#sec-catch .card .qualify-note{ font-style:italic; margin-top:-10px; }
 #sec-catch .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
 #sec-catch .rangebox{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;
@@ -738,7 +737,6 @@ footer.tyee-footer{
 }
 #sec-catch .pill.active{ background:var(--copper); border-color:var(--copper); color:var(--ink); }
 #sec-catch .pill:hover:not(.active){ background:var(--paper-dim); }
-#sec-catch .pill-partial{ border-style:dashed; opacity:0.85; }
 #sec-catch .ledger-row{ display:grid; grid-template-columns:34px 1fr 120px 80px; align-items:center; gap:14px; padding:9px 0; border-bottom:1px dashed var(--line); cursor:pointer; }
 #sec-catch .ledger-row.static{ cursor:default; }
 #sec-catch .ledger-row.static:hover{ background:none; }
@@ -899,7 +897,6 @@ footer.tyee-footer{
 #sec-guide .card{ background:var(--white-ink); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px; }
 #sec-guide .card h3{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 4px; color:var(--ink); }
 #sec-guide .card .note{ color:var(--sage); font-size:13px; margin:0 0 16px; }
-#sec-guide .card .qualify-note{ font-style:italic; margin-top:-10px; }
 #sec-guide .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
 #sec-guide .rangebox{
   display:flex; align-items:center; gap:12px; flex-wrap:wrap;
@@ -923,7 +920,6 @@ footer.tyee-footer{
 }
 #sec-guide .pill.active{ background:var(--copper); border-color:var(--copper); color:var(--ink); }
 #sec-guide .pill:hover:not(.active){ background:var(--paper-dim); }
-#sec-guide .pill-partial{ border-style:dashed; opacity:0.85; }
 #sec-guide .ledger-row{ display:grid; grid-template-columns:34px 1fr 120px 80px; align-items:center; gap:14px; padding:9px 0; border-bottom:1px dashed var(--line); cursor:pointer; }
 #sec-guide .ledger-row.static{ cursor:default; }
 #sec-guide .ledger-row.static:hover{ background:none; }
@@ -985,12 +981,10 @@ footer.tyee-footer{
     <button class="tab-btn active" data-lb="angler-count">Anglers: Most Fish</button>
     <button class="tab-btn" data-lb="angler-weight">Anglers: Combined Weight</button>
     <button class="tab-btn" data-lb="angler-pct">Anglers: Percent of Catch</button>
-    <button class="tab-btn" data-lb="angler-rate">Anglers: Tyee per Season</button>
   </nav>
   <section class="lb-panel active" id="lb-angler-count"></section>
   <section class="lb-panel" id="lb-angler-weight"></section>
   <section class="lb-panel" id="lb-angler-pct"></section>
-  <section class="lb-panel" id="lb-angler-rate"></section>
 
   <footer class="foot">
     Source: Tyee Club of BC yearbook rosters, 1924–2025. Name matching normalizes punctuation/spacing (e.g. "A.N. Wolverton" and "A. N. Wolverton" are treated as the same angler); it does not merge different people who share a name.
@@ -1026,12 +1020,10 @@ footer.tyee-footer{
     <button class="tab-btn active" data-lb="guide-pct">Guides: Percent of Catch</button>
     <button class="tab-btn" data-lb="guide-count">Guides: Most Fish</button>
     <button class="tab-btn" data-lb="guide-weight">Guides: Combined Weight</button>
-    <button class="tab-btn" data-lb="guide-rate">Guides: Tyee per Season</button>
   </nav>
   <section class="lb-panel active" id="lb-guide-pct"></section>
   <section class="lb-panel" id="lb-guide-count"></section>
   <section class="lb-panel" id="lb-guide-weight"></section>
-  <section class="lb-panel" id="lb-guide-rate"></section>
 
   <footer class="foot">
     Source: Tyee Club of BC yearbook rosters, 1924–2025. Guide credit reflects the rower/guide recorded against each catch; name matching normalizes punctuation/spacing the same way it does for anglers.
@@ -1928,70 +1920,35 @@ CATCHES.forEach(row=>{
   if (yr) YEAR_TOTALS.set(yr, (YEAR_TOTALS.get(yr)||0)+1);
 });
 
-function totalInRange(fromYear, toYear){
-  let total = 0;
-  YEAR_TOTALS.forEach((cnt,yr)=>{ if (yr>=fromYear && yr<=toYear) total += cnt; });
-  return total;
-}
-
-// total tyee registered, decade by decade, and across the whole ledger --
-// these are the denominators for the decadal / all-time share-of-catch figures
-const DECADE_TOTALS = new Map(); // decadeLabel -> total catches registered that decade
-let ALL_TOTAL = 0;
-YEAR_TOTALS.forEach((cnt,yr)=>{
-  ALL_TOTAL += cnt;
-  const decLbl = (Math.floor(yr/10)*10) + 's';
-  DECADE_TOTALS.set(decLbl, (DECADE_TOTALS.get(decLbl)||0) + cnt);
-});
-
-function computeShareOfCatch(entry, assumeContinuous){
+function computeShareOfCatch(entry){
   const yearCounts = new Map();
   entry.catches.forEach(c=>{ if (c.year) yearCounts.set(+c.year, (yearCounts.get(+c.year)||0)+1); });
 
-  const yearPct = new Map(); // year -> % of that year's total catch (a single year's own ratio)
+  const yearPct = new Map(); // year -> % of that year's total catch
   yearCounts.forEach((cnt,yr)=>{
     const total = YEAR_TOTALS.get(yr);
     if (total) yearPct.set(yr, cnt/total*100);
   });
   entry.yearPct = yearPct;
 
-  entry.firstYear = yearCounts.size ? Math.min(...yearCounts.keys()) : null;
-  entry.lastYear = yearCounts.size ? Math.max(...yearCounts.keys()) : null;
-  entry.assumeContinuous = !!assumeContinuous;
+  // overall mean: plain average of the yearly % figures across every year active
+  const allPct = Array.from(yearPct.values());
+  entry.overallMeanPct = allPct.length ? allPct.reduce((a,b)=>a+b,0)/allPct.length : null;
 
-  // "years active" -- for guides, assume continuous activity from their first to their
-  // last registered catch (they typically own their own boat and are invested in the
-  // fishery every season; few guides land a qualifying tyee their very first year, and
-  // few land one every single year, so counting only years with a catch understates their
-  // real tenure). Anglers are NOT assumed continuous -- most don't fish every season, so
-  // only years with an actual registered catch count.
-  entry.nYearsActive = assumeContinuous
-    ? (entry.firstYear!==null ? (entry.lastYear - entry.firstYear + 1) : 0)
-    : yearPct.size;
-
-  // period-size-independent rate: this entry's own catches ÷ their own active years
-  // (as defined above) -- never touches a club-wide or decade total, so it isn't
-  // affected by which decades happen to be bigger or smaller
-  entry.avgPerActiveYear = entry.nYearsActive ? entry.count / entry.nYearsActive : null;
-
-  // overall %: this entry's total catches (all years) ÷ total tyee EVER registered
-  entry.overallMeanPct = ALL_TOTAL ? (entry.count / ALL_TOTAL * 100) : null;
-
-  // decadal %: this entry's catches in a decade ÷ total tyee registered THAT DECADE
-  // (the full decade total, not just the years this entry happened to be active)
-  const decadeCatchCounts = new Map();
-  yearCounts.forEach((cnt,yr)=>{
+  // decadal mean: plain average of the yearly % figures, grouped by decade
+  const decadeBuckets = new Map();
+  yearPct.forEach((pct,yr)=>{
     const decLbl = (Math.floor(yr/10)*10) + 's';
-    decadeCatchCounts.set(decLbl, (decadeCatchCounts.get(decLbl)||0) + cnt);
+    if (!decadeBuckets.has(decLbl)) decadeBuckets.set(decLbl, []);
+    decadeBuckets.get(decLbl).push(pct);
   });
   entry.decadeMeanPct = new Map();
-  decadeCatchCounts.forEach((cnt,decLbl)=>{
-    const decTotal = DECADE_TOTALS.get(decLbl);
-    if (decTotal) entry.decadeMeanPct.set(decLbl, cnt/decTotal*100);
+  decadeBuckets.forEach((arr,decLbl)=>{
+    entry.decadeMeanPct.set(decLbl, arr.reduce((a,b)=>a+b,0)/arr.length);
   });
 }
-guideIndex.forEach(e=>computeShareOfCatch(e, true));
-anglerIndex.forEach(e=>computeShareOfCatch(e, false));
+guideIndex.forEach(computeShareOfCatch);
+anglerIndex.forEach(computeShareOfCatch);
 
 
 function yearRangeLabel(years){
@@ -2004,32 +1961,11 @@ const DECADES = Array.from(new Set(CATCHES.map(r=>r[2]).filter(Boolean))).sort()
 const ALL_YEARS = CATCHES.map(r=>r[1]?+r[1]:null).filter(y=>y!==null);
 const YEAR_MIN = Math.min(...ALL_YEARS);
 const YEAR_MAX = Math.max(...ALL_YEARS);
-const DECADE_BOUNDS = {}; // '1950s' -> [1950,1959] (calendar bounds, not clipped to data)
+const DECADE_BOUNDS = {}; // '1950s' -> [1950,1959]
 DECADES.forEach(d=>{
   const start = parseInt(d,10);
   DECADE_BOUNDS[d] = [start, start+9];
 });
-
-// a decade is "partial" if the ledger doesn't cover its full 10 calendar years --
-// true for the 1920s (club founded 1924) and the 2020s (still in progress)
-const PARTIAL_DECADES = new Map(); // decadeLabel -> {yearsAvailable, yearsCovering}
-DECADES.forEach(d=>{
-  const [s,e] = DECADE_BOUNDS[d];
-  const effStart = Math.max(s, YEAR_MIN), effEnd = Math.min(e, YEAR_MAX);
-  const yearsAvailable = effEnd - effStart + 1;
-  if (yearsAvailable < 10) PARTIAL_DECADES.set(d, {yearsAvailable, effStart, effEnd});
-});
-
-// minimum years active (within whatever range is selected) to qualify for a
-// share-of-catch or catch-rate leaderboard -- keeps single-fish/one-season entries
-// from ranking above sustained multi-year participants; clamped so short custom
-// ranges don't accidentally exclude everyone
-const MIN_YEARS_ACTIVE_QUALIFY = 3;
-function qualifyThreshold(fromYear, toYear){
-  let yearsInRange = 0;
-  YEAR_TOTALS.forEach((cnt,yr)=>{ if (yr>=fromYear && yr<=toYear) yearsInRange++; });
-  return Math.min(MIN_YEARS_ACTIVE_QUALIFY, yearsInRange);
-}
 
 /* aggregate any [fromYear,toYear] range on the fly -- cheap enough to run per interaction */
 function aggregateRange(fromYear, toYear, subjectType){
@@ -2050,59 +1986,29 @@ function aggregateRange(fromYear, toYear, subjectType){
   return map;
 }
 
-/* years "active" within [fromYear,toYear] for a given entry -- for guides (assumeContinuous)
-   this is the overlap between their [firstYear,lastYear] career span and the range; for
-   anglers it's the count of distinct years they actually registered a catch in the range */
-function activeYearsInRange(entry, fromYear, toYear){
-  if (entry.assumeContinuous){
-    if (entry.firstYear===null) return 0;
-    const lo = Math.max(entry.firstYear, fromYear);
-    const hi = Math.min(entry.lastYear, toYear);
-    return Math.max(0, hi - lo + 1);
-  }
-  let n = 0;
-  entry.yearPct.forEach((pct, yr)=>{ if (yr>=fromYear && yr<=toYear) n++; });
-  return n;
-}
-
-/* share-of-catch over any [fromYear,toYear] range, for anglers or guides: this entry's
-   total catches in the range ÷ total tyee registered in that WHOLE range (not just the
-   years this entry happened to be active) -- same definition as the decadal/all-time
-   figures on the profile, so a decade-pill click here reproduces g.decadeMeanPct exactly. */
+/* mean share-of-season's-catch over any [fromYear,toYear] range, for anglers or guides,
+   built from each entry's precomputed yearPct map (plain average of the yearly %s, same
+   definition used in the profile's decadal/overall figures) */
 function aggregatePctRange(fromYear, toYear, subjectType){
   const idx = subjectType==='angler' ? anglerIndex : guideIndex;
-  const rangeTotal = totalInRange(fromYear, toYear); // Z: total tyee registered across the whole range
-  const map = new Map(); // key -> {pct, nYears, ownCatches, rangeTotal}
+  const map = new Map(); // key -> {meanPct, nYears, ownCatches, totalWhileActive}
   idx.forEach((entry, key)=>{
-    const nYearsActive = activeYearsInRange(entry, fromYear, toYear);
-    if (!nYearsActive) return;
+    const vals = [];
+    const activeYears = [];
+    entry.yearPct.forEach((pct, yr)=>{
+      if (yr>=fromYear && yr<=toYear){ vals.push(pct); activeYears.push(yr); }
+    });
+    if (!vals.length) return;
     let ownCatches = 0;
     entry.catches.forEach(c=>{
       const yr = c.year ? +c.year : null;
       if (yr!==null && yr>=fromYear && yr<=toYear) ownCatches++;
     });
-    const pct = rangeTotal ? (ownCatches/rangeTotal*100) : null;
-    map.set(key, {pct, nYears: nYearsActive, ownCatches, rangeTotal});
-  });
-  return map;
-}
-
-/* period-size-independent catch rate over any [fromYear,toYear] range: this entry's own
-   catches ÷ their own active years within the range (see activeYearsInRange) -- no
-   club-wide total involved, so it isn't skewed by how big or small that range's overall
-   catch pool happens to be */
-function aggregateRateRange(fromYear, toYear, subjectType){
-  const idx = subjectType==='angler' ? anglerIndex : guideIndex;
-  const map = new Map(); // key -> {rate, nYears, ownCatches}
-  idx.forEach((entry, key)=>{
-    const nYearsActive = activeYearsInRange(entry, fromYear, toYear);
-    if (!nYearsActive) return;
-    let ownCatches = 0;
-    entry.catches.forEach(c=>{
-      const yr = c.year ? +c.year : null;
-      if (yr!==null && yr>=fromYear && yr<=toYear) ownCatches++;
-    });
-    map.set(key, {rate: ownCatches/nYearsActive, nYears: nYearsActive, ownCatches});
+    // Z: club-wide total across exactly the years this person was active (not the whole range)
+    let totalWhileActive = 0;
+    activeYears.forEach(yr=>{ totalWhileActive += (YEAR_TOTALS.get(yr)||0); });
+    const meanPct = vals.reduce((a,b)=>a+b,0)/vals.length;
+    map.set(key, {meanPct, nYears: vals.length, ownCatches, totalWhileActive});
   });
   return map;
 }
@@ -2343,7 +2249,6 @@ function renderGuideProfile(key, g){
         <div class="pstat"><div class="num">${avgW ? avgW.toFixed(1)+' lb' : '—'}</div><div class="lbl">Average Weight</div></div>
         <div class="pstat"><div class="num">${minYear ? minYear+'–'+maxYear : '—'}</div><div class="lbl">Active Seasons</div></div>
         <div class="pstat"><div class="num">${g.overallMeanPct!==null ? g.overallMeanPct.toFixed(1)+'%' : '—'}</div><div class="lbl">Avg. Share of Season's Catch</div></div>
-        <div class="pstat"><div class="num">${g.avgPerActiveYear!==null ? g.avgPerActiveYear.toFixed(2) : '—'}</div><div class="lbl">Tyee per Active Season</div></div>
         ${topAngler ? `<div class="pstat"><div class="num" style="font-size:15px;">${esc(topAngler)}</div><div class="lbl">Most-Guided Angler (${topAnglerN}×)</div></div>` : ''}
       </div>
       <div class="decade-mini">
@@ -2352,7 +2257,7 @@ function renderGuideProfile(key, g){
           return `<div class="decade-chip">${esc(d)}: <b>${decadeCounts[d]}</b>${dp!==undefined ? ` · ${dp.toFixed(1)}% avg` : ''}</div>`;
         }).join('')}
       </div>
-      <p class="note" style="color:var(--sage); font-size:13px; margin:-6px 0 16px;">"Share of season's catch" (per catch, in the table below) is the % of that year's total qualifying catches this guide landed. The decade and overall figures above are this guide's catches in that decade / across the whole ledger, divided by the total tyee registered in that same period. "Tyee per Active Season" is this guide's own catches ÷ their years active, assumed continuous from their first to their last registered catch (guides typically fish every season, even in years they don't land a qualifying tyee). It doesn't touch the club-wide total, so it isn't affected by whether their years happened to fall in a big or small season.</p>
+      <p class="note" style="color:var(--sage); font-size:13px; margin:-6px 0 16px;">"Share of season's catch" is the % of that year's total qualifying catches (all anglers, all guides) this guide landed. Decade and overall figures are the plain average of those yearly %s across the years shown.</p>
       <div class="tablewrap">
         <table class="catchtable">
           <thead><tr><th>Date</th><th class="num">Weight</th><th>Angler</th><th>City / Prov</th><th>Lure</th><th class="num">Share of Yr</th></tr></thead>
@@ -2426,14 +2331,12 @@ function buildLeaderboard(panelId, opts){
       </div>
       <h3 class="lb-title">All Time Leaderboard</h3>
       <p class="note">${note}</p>
-      <p class="note qualify-note"></p>
       <div class="lb-rows"></div>
     </div>
   `;
   const pillHost = $('.pillrow', panel);
   const fromInput = $('.yr-from', panel);
   const toInput = $('.yr-to', panel);
-  const qualifyNoteEl = $('.qualify-note', panel);
   const applyBtn = $('.apply-btn', panel);
   const titleEl = $('.lb-title', panel);
   const rowsHost = $('.lb-rows', panel);
@@ -2441,10 +2344,8 @@ function buildLeaderboard(panelId, opts){
   const presets = [['all-time','All-time',YEAR_MIN,YEAR_MAX], ...DECADES.map(d=>[d,d,DECADE_BOUNDS[d][0],DECADE_BOUNDS[d][1]])];
   presets.forEach(([id,label,from,to])=>{
     const btn = document.createElement('button');
-    const partial = PARTIAL_DECADES.get(id);
-    btn.className = 'pill' + (id==='all-time' ? ' active' : '') + (partial ? ' pill-partial' : '');
-    btn.textContent = label + (partial ? ' \u25b3' : '');
-    if (partial) btn.title = `Partial decade — the ledger only covers ${partial.effStart}\u2013${partial.effEnd} (${partial.yearsAvailable} of 10 years). Shares/rates here aren't directly comparable to a full decade.`;
+    btn.className = 'pill' + (id==='all-time' ? ' active' : '');
+    btn.textContent = label;
     btn.dataset.from = from;
     btn.dataset.to = to;
     btn.addEventListener('click', ()=>{
@@ -2452,7 +2353,7 @@ function buildLeaderboard(panelId, opts){
       btn.classList.add('active');
       fromInput.value = from;
       toInput.value = to;
-      renderRange(from, to, (label==='All-time' ? 'All Time Leaderboard' : `${label} (top 10)`) + (partial ? ' — partial decade' : ''), from===YEAR_MIN && to===YEAR_MAX ? 15 : 10);
+      renderRange(from, to, label==='All-time' ? 'All Time Leaderboard' : `${label} (top 10)`, from===YEAR_MIN && to===YEAR_MAX ? 15 : 10);
     });
     pillHost.appendChild(btn);
   });
@@ -2477,38 +2378,23 @@ function buildLeaderboard(panelId, opts){
   function renderRange(from, to, titleText, limit){
     titleEl.textContent = titleText;
 
-    if (metric==='pct' || metric==='rate'){
-      const map = metric==='pct' ? aggregatePctRange(from, to, subjectType) : aggregateRateRange(from, to, subjectType);
-      const threshold = qualifyThreshold(from, to);
-      const totalEntries = map.size;
-      const qualified = new Map(Array.from(map.entries()).filter(([,v])=>v.nYears>=threshold));
-      const excluded = totalEntries - qualified.size;
-
-      qualifyNoteEl.textContent = threshold>0
-        ? `Showing ${subjectType}s with at least ${threshold} year${threshold===1?'':'s'} active in this range${excluded ? ` (${fmt(excluded)} with fewer years omitted)` : ''}.`
-        : '';
-
-      let pairs = Array.from(qualified.entries()).map(([key,v])=>{
+    if (metric==='pct'){
+      const map = aggregatePctRange(from, to, subjectType);
+      let pairs = Array.from(map.entries()).map(([key,v])=>{
         const idx = index.get(key);
         const display = idx ? idx.display : key;
         const years = idx ? yearRangeLabel(idx.years) : '';
         const flag = (subjectType==='angler' && idx) ? idx.flag : '';
         const verb = subjectType==='guide' ? 'rowed' : 'caught';
-        if (metric==='pct'){
-          const sub = `${v.nYears} yr${v.nYears===1?'':'s'} active \u00b7 ${fmt(v.ownCatches)} of ${fmt(v.rangeTotal)} tyee ${verb}`;
-          return [display, v.pct, key, sub, years, flag];
-        } else {
-          const sub = `${v.nYears} yr${v.nYears===1?'':'s'} active \u00b7 ${fmt(v.ownCatches)} tyee ${verb}`;
-          return [display, v.rate, key, sub, years, flag];
-        }
+        const sub = `${v.nYears} yr${v.nYears===1?'':'s'} active \u00b7 ${fmt(v.ownCatches)} of ${fmt(v.totalWhileActive)} tyee ${verb}`;
+        return [display, v.meanPct, key, sub, years, flag];
       });
       pairs.sort((a,b)=>b[1]-a[1]);
       pairs = pairs.slice(0, limit);
-      ledgerRows(rowsHost, pairs, {fmt: v => metric==='pct' ? v.toFixed(1)+'%' : v.toFixed(2)+'/yr', clickable, onSelect});
+      ledgerRows(rowsHost, pairs, {fmt: v => v.toFixed(1)+'%', clickable, onSelect});
       return;
     }
 
-    qualifyNoteEl.textContent = '';
     const map = aggregateRange(from, to, subjectType);
     let pairs = Array.from(map.entries()).map(([key,v])=>{
       const idx = index.get(key);
@@ -2549,12 +2435,10 @@ initLbNav('guideLbTabs');
 
 buildLeaderboard('lb-angler-count', {subjectType:'angler', metric:'count', note:'Click any angler to see their full record.'});
 buildLeaderboard('lb-angler-weight', {subjectType:'angler', metric:'weight', note:'Click any angler to see their full record.'});
-buildLeaderboard('lb-angler-pct', {subjectType:'angler', metric:'pct', note:`Each angler's catches over the range selected, divided by the total tyee registered across that whole range. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total. "Years active" counts only years an angler actually registered a catch.`});
-buildLeaderboard('lb-angler-rate', {subjectType:'angler', metric:'rate', note:"Each angler's own catches ÷ their own years active in the range (years they actually registered a catch) — independent of how big or small that range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
-buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:`Each guide's catches over the range selected, divided by the total tyee registered across that whole range — the same figures shown on their profile. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total. "Years active" assumes a guide fished every year from their first to their last registered catch (guides typically own their own boat and fish every season, but rarely land a qualifying tyee every single year).`});
+buildLeaderboard('lb-angler-pct', {subjectType:'angler', metric:'pct', note:"Each angler's average share of a season's total catch over the range selected. Small-sample seasons can rank high on very few fish; check the years-active count alongside the %."});
+buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:"Each guide's average share of a season's total catch over the range selected — the same figure shown on their profile. Small-sample seasons can rank high on very few fish; check the years-active count alongside the %."});
 buildLeaderboard('lb-guide-count', {subjectType:'guide', metric:'count', note:'Click any guide to see their full record.'});
 buildLeaderboard('lb-guide-weight', {subjectType:'guide', metric:'weight', note:'Click any guide to see their full record.'});
-buildLeaderboard('lb-guide-rate', {subjectType:'guide', metric:'rate', note:"Each guide's own catches ÷ their years active, assumed continuous from their first to their last registered catch — independent of how big or small a range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
 
 })();
 </script>

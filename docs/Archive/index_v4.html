@@ -1944,7 +1944,7 @@ YEAR_TOTALS.forEach((cnt,yr)=>{
   DECADE_TOTALS.set(decLbl, (DECADE_TOTALS.get(decLbl)||0) + cnt);
 });
 
-function computeShareOfCatch(entry, assumeContinuous){
+function computeShareOfCatch(entry){
   const yearCounts = new Map();
   entry.catches.forEach(c=>{ if (c.year) yearCounts.set(+c.year, (yearCounts.get(+c.year)||0)+1); });
 
@@ -1955,23 +1955,10 @@ function computeShareOfCatch(entry, assumeContinuous){
   });
   entry.yearPct = yearPct;
 
-  entry.firstYear = yearCounts.size ? Math.min(...yearCounts.keys()) : null;
-  entry.lastYear = yearCounts.size ? Math.max(...yearCounts.keys()) : null;
-  entry.assumeContinuous = !!assumeContinuous;
-
-  // "years active" -- for guides, assume continuous activity from their first to their
-  // last registered catch (they typically own their own boat and are invested in the
-  // fishery every season; few guides land a qualifying tyee their very first year, and
-  // few land one every single year, so counting only years with a catch understates their
-  // real tenure). Anglers are NOT assumed continuous -- most don't fish every season, so
-  // only years with an actual registered catch count.
-  entry.nYearsActive = assumeContinuous
-    ? (entry.firstYear!==null ? (entry.lastYear - entry.firstYear + 1) : 0)
-    : yearPct.size;
-
-  // period-size-independent rate: this entry's own catches ÷ their own active years
-  // (as defined above) -- never touches a club-wide or decade total, so it isn't
-  // affected by which decades happen to be bigger or smaller
+  // period-size-independent rate: this entry's own catches ÷ their own distinct
+  // active years -- never touches a club-wide or decade total, so it isn't affected
+  // by which decades happen to be bigger or smaller
+  entry.nYearsActive = yearPct.size;
   entry.avgPerActiveYear = entry.nYearsActive ? entry.count / entry.nYearsActive : null;
 
   // overall %: this entry's total catches (all years) ÷ total tyee EVER registered
@@ -1990,8 +1977,8 @@ function computeShareOfCatch(entry, assumeContinuous){
     if (decTotal) entry.decadeMeanPct.set(decLbl, cnt/decTotal*100);
   });
 }
-guideIndex.forEach(e=>computeShareOfCatch(e, true));
-anglerIndex.forEach(e=>computeShareOfCatch(e, false));
+guideIndex.forEach(computeShareOfCatch);
+anglerIndex.forEach(computeShareOfCatch);
 
 
 function yearRangeLabel(years){
@@ -2050,21 +2037,6 @@ function aggregateRange(fromYear, toYear, subjectType){
   return map;
 }
 
-/* years "active" within [fromYear,toYear] for a given entry -- for guides (assumeContinuous)
-   this is the overlap between their [firstYear,lastYear] career span and the range; for
-   anglers it's the count of distinct years they actually registered a catch in the range */
-function activeYearsInRange(entry, fromYear, toYear){
-  if (entry.assumeContinuous){
-    if (entry.firstYear===null) return 0;
-    const lo = Math.max(entry.firstYear, fromYear);
-    const hi = Math.min(entry.lastYear, toYear);
-    return Math.max(0, hi - lo + 1);
-  }
-  let n = 0;
-  entry.yearPct.forEach((pct, yr)=>{ if (yr>=fromYear && yr<=toYear) n++; });
-  return n;
-}
-
 /* share-of-catch over any [fromYear,toYear] range, for anglers or guides: this entry's
    total catches in the range ÷ total tyee registered in that WHOLE range (not just the
    years this entry happened to be active) -- same definition as the decadal/all-time
@@ -2074,7 +2046,8 @@ function aggregatePctRange(fromYear, toYear, subjectType){
   const rangeTotal = totalInRange(fromYear, toYear); // Z: total tyee registered across the whole range
   const map = new Map(); // key -> {pct, nYears, ownCatches, rangeTotal}
   idx.forEach((entry, key)=>{
-    const nYearsActive = activeYearsInRange(entry, fromYear, toYear);
+    let nYearsActive = 0;
+    entry.yearPct.forEach((pct, yr)=>{ if (yr>=fromYear && yr<=toYear) nYearsActive++; });
     if (!nYearsActive) return;
     let ownCatches = 0;
     entry.catches.forEach(c=>{
@@ -2088,14 +2061,14 @@ function aggregatePctRange(fromYear, toYear, subjectType){
 }
 
 /* period-size-independent catch rate over any [fromYear,toYear] range: this entry's own
-   catches ÷ their own active years within the range (see activeYearsInRange) -- no
-   club-wide total involved, so it isn't skewed by how big or small that range's overall
-   catch pool happens to be */
+   catches ÷ their own distinct active years within the range -- no club-wide total involved,
+   so it isn't skewed by how big or small that range's overall catch pool happens to be */
 function aggregateRateRange(fromYear, toYear, subjectType){
   const idx = subjectType==='angler' ? anglerIndex : guideIndex;
   const map = new Map(); // key -> {rate, nYears, ownCatches}
   idx.forEach((entry, key)=>{
-    const nYearsActive = activeYearsInRange(entry, fromYear, toYear);
+    let nYearsActive = 0;
+    entry.yearPct.forEach((pct, yr)=>{ if (yr>=fromYear && yr<=toYear) nYearsActive++; });
     if (!nYearsActive) return;
     let ownCatches = 0;
     entry.catches.forEach(c=>{
@@ -2352,7 +2325,7 @@ function renderGuideProfile(key, g){
           return `<div class="decade-chip">${esc(d)}: <b>${decadeCounts[d]}</b>${dp!==undefined ? ` · ${dp.toFixed(1)}% avg` : ''}</div>`;
         }).join('')}
       </div>
-      <p class="note" style="color:var(--sage); font-size:13px; margin:-6px 0 16px;">"Share of season's catch" (per catch, in the table below) is the % of that year's total qualifying catches this guide landed. The decade and overall figures above are this guide's catches in that decade / across the whole ledger, divided by the total tyee registered in that same period. "Tyee per Active Season" is this guide's own catches ÷ their years active, assumed continuous from their first to their last registered catch (guides typically fish every season, even in years they don't land a qualifying tyee). It doesn't touch the club-wide total, so it isn't affected by whether their years happened to fall in a big or small season.</p>
+      <p class="note" style="color:var(--sage); font-size:13px; margin:-6px 0 16px;">"Share of season's catch" (per catch, in the table below) is the % of that year's total qualifying catches this guide landed. The decade and overall figures above are this guide's catches in that decade / across the whole ledger, divided by the total tyee registered in that same period. "Tyee per Active Season" is this guide's own catches ÷ their own years active — it doesn't depend on the club-wide total, so it isn't affected by whether their years happened to fall in a big or small season.</p>
       <div class="tablewrap">
         <table class="catchtable">
           <thead><tr><th>Date</th><th class="num">Weight</th><th>Angler</th><th>City / Prov</th><th>Lure</th><th class="num">Share of Yr</th></tr></thead>
@@ -2549,12 +2522,12 @@ initLbNav('guideLbTabs');
 
 buildLeaderboard('lb-angler-count', {subjectType:'angler', metric:'count', note:'Click any angler to see their full record.'});
 buildLeaderboard('lb-angler-weight', {subjectType:'angler', metric:'weight', note:'Click any angler to see their full record.'});
-buildLeaderboard('lb-angler-pct', {subjectType:'angler', metric:'pct', note:`Each angler's catches over the range selected, divided by the total tyee registered across that whole range. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total. "Years active" counts only years an angler actually registered a catch.`});
-buildLeaderboard('lb-angler-rate', {subjectType:'angler', metric:'rate', note:"Each angler's own catches ÷ their own years active in the range (years they actually registered a catch) — independent of how big or small that range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
-buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:`Each guide's catches over the range selected, divided by the total tyee registered across that whole range — the same figures shown on their profile. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total. "Years active" assumes a guide fished every year from their first to their last registered catch (guides typically own their own boat and fish every season, but rarely land a qualifying tyee every single year).`});
+buildLeaderboard('lb-angler-pct', {subjectType:'angler', metric:'pct', note:`Each angler's catches over the range selected, divided by the total tyee registered across that whole range. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total.`});
+buildLeaderboard('lb-angler-rate', {subjectType:'angler', metric:'rate', note:"Each angler's own catches ÷ their own distinct years active in the range — independent of how big or small that range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
+buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:`Each guide's catches over the range selected, divided by the total tyee registered across that whole range — the same figures shown on their profile. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total.`});
 buildLeaderboard('lb-guide-count', {subjectType:'guide', metric:'count', note:'Click any guide to see their full record.'});
 buildLeaderboard('lb-guide-weight', {subjectType:'guide', metric:'weight', note:'Click any guide to see their full record.'});
-buildLeaderboard('lb-guide-rate', {subjectType:'guide', metric:'rate', note:"Each guide's own catches ÷ their years active, assumed continuous from their first to their last registered catch — independent of how big or small a range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
+buildLeaderboard('lb-guide-rate', {subjectType:'guide', metric:'rate', note:"Each guide's own catches ÷ their own distinct years active in the range — independent of how big or small that range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
 
 })();
 </script>
