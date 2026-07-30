@@ -160,13 +160,6 @@ footer.tyee-footer{
 #sec-catch table.catchtable{
   min-width:520px;
 }
-#sec-guide .tablewrap{
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-}
-#sec-guide table.catchtable{
-  min-width:520px;
-}
 
 /* ===== Angler Origin section styles ===== */
 
@@ -754,189 +747,6 @@ footer.tyee-footer{
 #sec-catch .empty-state p{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; margin:0; }
 #sec-catch footer.foot{ margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--sage); font-size:12.5px; font-family:'IBM Plex Mono',monospace; }
 @media (max-width:640px){#sec-catch .hero{ padding:32px 20px 26px; }#sec-catch .ledger-row{ grid-template-columns:24px 1fr 60px 56px; gap:8px; }#sec-catch .card{ padding:18px; }#sec-catch .profile-card{ padding:20px; }#sec-catch .tab-btn{ font-size:13px; padding:9px 14px 10px; }#sec-catch .rangebox{ padding:10px 12px; gap:8px; }#sec-catch .rangebox input[type="number"]{ width:66px; }}
-
-/* ===== Guide Catch History section (mirrors Angler Catch History) ===== */
-#sec-guide{
-  --ink:#ECE3D0; --paper:#0F1E23; --paper-dim:#17282E; --paper-deep:#0B171B;
-  --deep-water:#0F1E23; --deep-water-2:#0B171B;
-  --brass:#CDA53A; --brass-light:#E3C36B; --copper:#CD7C46; --copper-dim:#8A5834;
-  --sage:#8FA8AC; --line:rgba(236,227,208,0.16); --white-ink:#1E343B;
-  --shadow: 0 2px 10px rgba(0,0,0,0.35);
-}
-
-#sec-guide *{box-sizing:border-box;}
-#sec-guide{margin:0;padding:0;}
-#sec-guide{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Inter',sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-#sec-guide .app{max-width:980px;margin:0 auto;padding:0 24px 80px;}
-#sec-guide .hero{
-  position:relative;
-  background:radial-gradient(1200px 400px at 20% -10%, #1E343B 0%, var(--deep-water) 55%, var(--deep-water-2) 100%);
-  color:var(--ink);
-  border-radius:0 0 18px 18px;
-  padding:44px 40px 34px;
-  margin:0 -24px 28px;
-  overflow:hidden;
-}
-#sec-guide .hero::before{
-  content:"";
-  position:absolute; inset:0;
-  opacity:0.16;
-  background-image:
-    repeating-radial-gradient(circle at 85% 20%, transparent 0, transparent 18px, rgba(212,184,118,0.5) 19px, transparent 20px, transparent 42px);
-  pointer-events:none;
-}
-#sec-guide .eyebrow{
-  font-family:'IBM Plex Mono',monospace;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  font-size:12px;
-  color:var(--brass-light);
-  margin:0 0 12px;
-  position:relative;
-}
-#sec-guide .hero h1{
-  font-family:'Fraunces',serif;
-  font-weight:600;
-  font-size:clamp(26px,4.4vw,40px);
-  line-height:1.08;
-  margin:0 0 8px;
-  max-width:680px;
-  position:relative;
-}
-#sec-guide .hero p.sub{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-weight:500;
-  color:#CFE3DE;
-  font-size:15.5px;
-  max-width:560px;
-  margin:0;
-  position:relative;
-}
-#sec-guide .searchwrap{ margin:26px 0 30px; position:relative; }
-#sec-guide .searchbox{
-  display:flex; align-items:center; gap:10px;
-  background:var(--white-ink);
-  border:2px solid var(--brass);
-  border-radius:12px;
-  padding:6px 8px 6px 18px;
-  box-shadow:var(--shadow);
-}
-#sec-guide .searchbox svg{ flex:0 0 auto; color:var(--sage); }
-#sec-guide .searchbox input{
-  flex:1; border:none; outline:none; background:transparent;
-  font-family:'Fraunces',serif; font-size:19px; color:var(--ink); padding:10px 4px;
-}
-#sec-guide .searchbox input::placeholder{ color:#8FA8AC; font-style:italic; }
-#sec-guide .searchbox .clearbtn{
-  border:none; background:var(--paper-dim); color:var(--sage);
-  width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:15px;
-  display:none; align-items:center; justify-content:center;
-}
-#sec-guide .searchbox .clearbtn.show{ display:flex; }
-#sec-guide .suggestions{
-  position:absolute; top:calc(100% + 6px); left:0; right:0;
-  background:var(--white-ink); border:1px solid var(--line); border-radius:10px;
-  box-shadow:var(--shadow); overflow:hidden; z-index:20; display:none;
-}
-#sec-guide .suggestions.show{ display:block; }
-#sec-guide .sugg-item{
-  padding:11px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:baseline;
-  border-bottom:1px solid var(--line);
-}
-#sec-guide .sugg-item:last-child{ border-bottom:none; }
-#sec-guide .sugg-item:hover, #sec-guide .sugg-item.hl{ background:var(--paper-dim); }
-#sec-guide .sugg-name{ font-family:'Fraunces',serif; font-size:15px; color:var(--ink); }
-#sec-guide .sugg-count{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--copper); white-space:nowrap; margin-left:12px; }
-#sec-guide .sugg-empty{ padding:16px 18px; color:var(--sage); font-size:13.5px; font-style:italic; }
-#sec-guide .profile{ display:none; }
-#sec-guide .profile.show{ display:block; }
-#sec-guide .profile-card{
-  background:var(--white-ink); border:1px solid var(--line); border-radius:14px;
-  box-shadow:var(--shadow); padding:26px 28px; margin-bottom:30px;
-}
-#sec-guide .profile-head{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:18px; }
-#sec-guide .profile-head h2{
-  font-family:'Fraunces',serif; font-weight:600; font-size:26px; margin:0; color:var(--ink);
-}
-#sec-guide .profile-head .variants{ font-size:12.5px; color:var(--sage); margin-top:4px; font-style:italic; }
-#sec-guide .profile-stats{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
-#sec-guide .pstat{ background:var(--paper-dim); border:1px solid var(--line); border-radius:9px; padding:10px 16px; min-width:110px; }
-#sec-guide .pstat .num{ font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; color:var(--copper); line-height:1; }
-#sec-guide .pstat .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color:var(--sage); margin-top:5px; }
-#sec-guide .decade-mini{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
-#sec-guide .decade-chip{
-  font-family:'IBM Plex Mono',monospace; font-size:11.5px; background:var(--deep-water); color:var(--ink);
-  padding:4px 10px; border-radius:999px;
-}
-#sec-guide .decade-chip b{ color:var(--brass-light); }
-#sec-guide table.catchtable{ width:100%; border-collapse:collapse; font-size:13px; }
-#sec-guide table.catchtable th{
-  font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em;
-  color:var(--sage); text-align:left; padding:7px 8px; border-bottom:2px solid var(--brass);
-}
-#sec-guide table.catchtable th.num, #sec-guide table.catchtable td.num{ text-align:right; }
-#sec-guide table.catchtable td{ padding:7px 8px; border-bottom:1px solid var(--line); }
-#sec-guide table.catchtable tr:hover td{ background:var(--paper-dim); }
-#sec-guide .tablewrap{ max-height:340px; overflow-y:auto; border:1px solid var(--line); border-radius:8px; }
-#sec-guide .tabs{ display:flex; gap:6px; flex-wrap:wrap; margin:0 0 0; border-bottom:2px solid var(--brass); }
-#sec-guide .tab-btn{
-  font-family:'Fraunces',serif; font-weight:600; font-size:15px; color:var(--sage);
-  background:var(--paper-dim); border:1px solid var(--line); border-bottom:none;
-  padding:10px 20px 12px; border-radius:8px 8px 0 0; cursor:pointer; position:relative; top:2px;
-}
-#sec-guide .tab-btn:hover{ color:var(--copper); background:var(--paper-deep); }
-#sec-guide .tab-btn.active{ color:var(--copper); background:var(--paper); border-color:var(--brass); border-bottom:2px solid var(--paper); }
-#sec-guide .lb-panel{ display:none; padding-top:26px; }
-#sec-guide .lb-panel.active{ display:block; }
-#sec-guide .card{ background:var(--white-ink); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px; }
-#sec-guide .card h3{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 4px; color:var(--ink); }
-#sec-guide .card .note{ color:var(--sage); font-size:13px; margin:0 0 16px; }
-#sec-guide .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
-#sec-guide .rangebox{
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  background:var(--paper-dim); border:1px solid var(--line); border-radius:9px;
-  padding:12px 16px; margin-bottom:18px;
-}
-#sec-guide .rangebox label{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--sage); font-family:'IBM Plex Mono',monospace; }
-#sec-guide .rangebox input[type="number"]{
-  width:78px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink);
-  border:1px solid var(--brass); border-radius:6px; padding:5px 8px; background:var(--white-ink);
-}
-#sec-guide .rangebox .apply-btn{
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600;
-  background:var(--copper); color:var(--ink); border:none; border-radius:6px;
-  padding:7px 14px; cursor:pointer;
-}
-#sec-guide .rangebox .apply-btn:hover{ background:var(--copper-dim); }
-#sec-guide .pill{
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; border:1px solid var(--brass); color:var(--ink);
-  background:transparent; padding:6px 13px; border-radius:999px; cursor:pointer;
-}
-#sec-guide .pill.active{ background:var(--copper); border-color:var(--copper); color:var(--ink); }
-#sec-guide .pill:hover:not(.active){ background:var(--paper-dim); }
-#sec-guide .ledger-row{ display:grid; grid-template-columns:34px 1fr 120px 80px; align-items:center; gap:14px; padding:9px 0; border-bottom:1px dashed var(--line); cursor:pointer; }
-#sec-guide .ledger-row.static{ cursor:default; }
-#sec-guide .ledger-row.static:hover{ background:none; }
-#sec-guide .ledger-row:hover{ background:var(--paper-dim); }
-#sec-guide .ledger-row:last-child{ border-bottom:none; }
-#sec-guide .rank{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--brass); border:1px solid var(--brass); border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
-#sec-guide .rowname{ font-size:14.5px; font-weight:500; color:var(--ink); }
-#sec-guide .rowname .yearrange{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:400; color:var(--sage); margin-left:6px; }
-#sec-guide .rowname .sub{ display:block; font-size:11.5px; color:var(--sage); font-weight:400; margin-top:1px; }
-#sec-guide .barwrap{ background:var(--paper-dim); border-radius:5px; height:9px; overflow:hidden; }
-#sec-guide .bar{ background:linear-gradient(90deg,var(--copper-dim),var(--copper)); height:100%; border-radius:5px; }
-#sec-guide .rowval{ font-family:'IBM Plex Mono',monospace; font-size:13.5px; text-align:right; color:var(--ink); font-weight:600; }
-#sec-guide .empty-state{ text-align:center; padding:36px 20px; color:var(--sage); }
-#sec-guide .empty-state svg{ opacity:0.5; margin-bottom:10px; }
-#sec-guide .empty-state p{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; margin:0; }
-#sec-guide footer.foot{ margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--sage); font-size:12.5px; font-family:'IBM Plex Mono',monospace; }
-@media (max-width:640px){#sec-guide .hero{ padding:32px 20px 26px; }#sec-guide .ledger-row{ grid-template-columns:24px 1fr 60px 56px; gap:8px; }#sec-guide .card{ padding:18px; }#sec-guide .profile-card{ padding:20px; }#sec-guide .tab-btn{ font-size:13px; padding:9px 14px 10px; }#sec-guide .rangebox{ padding:10px 12px; gap:8px; }#sec-guide .rangebox input[type="number"]{ width:66px; }}
 </style>
 </head>
 <body>
@@ -950,7 +760,6 @@ footer.tyee-footer{
 <nav class="tyee-navbar">
   <div class="tyee-tab-scroll" id="tyeeTabs">
     <button class="tyee-tab active" data-target="sec-catch">Angler Catch History</button>
-    <button class="tyee-tab" data-target="sec-guide">Guide Catch History</button>
     <button class="tyee-tab" data-target="sec-origin">Where Anglers Came From</button>
     <button class="tyee-tab" data-target="sec-weight">Weight Trends</button>
   </div>
@@ -980,53 +789,16 @@ footer.tyee-footer{
   <nav class="tabs" id="lbTabs">
     <button class="tab-btn active" data-lb="angler-count">Anglers: Most Fish</button>
     <button class="tab-btn" data-lb="angler-weight">Anglers: Combined Weight</button>
-    <button class="tab-btn" data-lb="angler-pct">Anglers: Percent of Catch</button>
-  </nav>
-  <section class="lb-panel active" id="lb-angler-count"></section>
-  <section class="lb-panel" id="lb-angler-weight"></section>
-  <section class="lb-panel" id="lb-angler-pct"></section>
-
-  <footer class="foot">
-    Source: Tyee Club of BC yearbook rosters, 1924–2025. Name matching normalizes punctuation/spacing (e.g. "A.N. Wolverton" and "A. N. Wolverton" are treated as the same angler); it does not merge different people who share a name.
-  </footer>
-</div>
-
-
-
-</div>
-
-<div id="sec-guide" class="tyee-section">
-
-<div class="app">
-
-  <div class="hero">
-    <p class="eyebrow">Tyee Club of British Columbia · Est. 1924</p>
-    <h1>Look up any guide in the ledger.</h1>
-    <p class="sub">Search a guide's name to see every tyee they've brought to net — then browse who's led each decade by number of tyee, and by total weight.</p>
-  </div>
-
-  <div class="searchwrap">
-    <div class="searchbox">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="guideSearchInput" placeholder="Search a guide, e.g. Eric Vogt. Oh wait, he hasn't registered yet. Try someone else." autocomplete="off">
-      <button class="clearbtn" id="guideClearBtn">&times;</button>
-    </div>
-    <div class="suggestions" id="guideSuggestions"></div>
-  </div>
-
-  <div class="profile" id="guideProfile"></div>
-
-  <nav class="tabs" id="guideLbTabs">
-    <button class="tab-btn active" data-lb="guide-pct">Guides: Percent of Catch</button>
     <button class="tab-btn" data-lb="guide-count">Guides: Most Fish</button>
     <button class="tab-btn" data-lb="guide-weight">Guides: Combined Weight</button>
   </nav>
-  <section class="lb-panel active" id="lb-guide-pct"></section>
+  <section class="lb-panel active" id="lb-angler-count"></section>
+  <section class="lb-panel" id="lb-angler-weight"></section>
   <section class="lb-panel" id="lb-guide-count"></section>
   <section class="lb-panel" id="lb-guide-weight"></section>
 
   <footer class="foot">
-    Source: Tyee Club of BC yearbook rosters, 1924–2025. Guide credit reflects the rower/guide recorded against each catch; name matching normalizes punctuation/spacing the same way it does for anglers.
+    Source: Tyee Club of BC yearbook rosters, 1924–2025. Name matching normalizes punctuation/spacing (e.g. "A.N. Wolverton" and "A. N. Wolverton" are treated as the same angler); it does not merge different people who share a name.
   </footer>
 </div>
 
@@ -1123,11 +895,10 @@ footer.tyee-footer{
 
   <div class="chart-card">
     <div class="chart-head">
-      <h2>Mean weight (lb), by year and decade</h2>
+      <h2>Mean weight (lb) by decade</h2>
       <div class="chart-legend">
-        <span><span class="swatch" style="background:var(--brass); opacity:0.3;"></span>decade average (background)</span>
+        <span><span class="swatch" style="background:var(--brass)"></span>mean weight</span>
         <span><span class="swatch" style="background:#4C6864"></span>± 1 standard error</span>
-        <span><span class="swatch" style="background:var(--brass)"></span>single year</span>
         <span><span class="swatch" style="background:var(--rust)"></span>30 lb qualifying line</span>
       </div>
     </div>
@@ -1165,6 +936,20 @@ footer.tyee-footer{
       </thead>
       <tbody id="ledgerBody"></tbody>
     </table>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top:40px;">
+    <div class="chart-head">
+      <h2>Mean weight, by year</h2>
+      <div class="chart-legend">
+        <span><span class="swatch" style="background:var(--brass); opacity:0.3;"></span>decade average (background)</span>
+        <span><span class="swatch" style="background:var(--brass)"></span>single year</span>
+      </div>
+    </div>
+    <div class="chart-wrap" id="weightYearWrap">
+      <svg id="weightYearSvg" viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="tooltip" id="tooltip2"></div>
     </div>
   </div>
 
@@ -1525,23 +1310,24 @@ data.forEach((d,i)=>{
   tbody.appendChild(tr);
 });
 
-// ================= MEAN WEIGHT — YEAR AND DECADE (combined) =================
+// ---- build chart ----
 const svg = document.getElementById('chartSvg');
 const tooltip = document.getElementById('tooltip');
 const wrap = document.getElementById('chartWrap');
 const NS = 'http://www.w3.org/2000/svg';
 
 const W = 980, H = 460;
-const marginL = 56, marginR = 20, marginT = 16, marginB = 44;
+const marginL = 46, marginR = 16, marginT = 16, marginB = 46;
 const plotW = W - marginL - marginR;
 const plotH = H - marginT - marginB;
-
-const xMinYr = 1924, xMaxYr = 2025;
-const xScaleYr = v => marginL + ( (v-xMinYr)/(xMaxYr-xMinYr) ) * plotW;
 
 const yMax = 46; // headroom above tallest mean+se
 const yMin = 0;
 const yScale = v => marginT + plotH - ( (v - yMin) / (yMax - yMin) ) * plotH;
+
+const n = data.length;
+const slot = plotW / n;
+const barW = slot * 0.46;
 
 function el(tag, attrs){
   const e = document.createElementNS(NS, tag);
@@ -1558,14 +1344,6 @@ function el(tag, attrs){
   svg.appendChild(t);
 });
 
-// calendar-year ticks along the x-axis
-[1930,1950,1970,1990,2010].forEach(v=>{
-  const x = xScaleYr(v);
-  const t = el('text', {x:x, y:H-marginB+20, class:'axis-label', 'text-anchor':'middle'});
-  t.textContent = v;
-  svg.appendChild(t);
-});
-
 // 30lb qualifying reference line
 const qy = yScale(30);
 svg.appendChild(el('line', {x1:marginL, x2:W-marginR, y1:qy, y2:qy, class:'qual-line'}));
@@ -1576,70 +1354,32 @@ svg.appendChild(ql);
 // baseline
 svg.appendChild(el('line', {x1:marginL, x2:W-marginR, y1:yScale(0), y2:yScale(0), class:'axis-line'}));
 
-// ---- background layer: decade average column, spanning each decade's real year span ----
 data.forEach((d,i)=>{
-  const x0 = xScaleYr(d.yrStart);
-  const x1 = xScaleYr(d.yrEnd+1);
+  const cx = marginL + slot*i + slot/2;
+  const x0 = cx - barW/2;
   const yTop = yScale(d.mean);
   const yBase = yScale(0);
-
-  const decBar = el('rect', {x:x0, y:yTop, width:(x1-x0), height:(yBase-yTop), class:'bar'+(i===peakIdx?' bar-peak':''), opacity:0.22});
-  svg.appendChild(decBar);
-
-  const hit = el('rect', {x:x0, y:marginT, width:(x1-x0), height:plotH, fill:'transparent', style:'cursor:pointer'});
-  hit.addEventListener('mousemove', ()=>{
-    const rect = wrap.getBoundingClientRect();
-    const scale = rect.width / W;
-    tooltip.style.left = ((x0+x1)/2)*scale + 'px';
-    tooltip.style.top = (yTop*scale - 8) + 'px';
-    tooltip.style.opacity = 1;
-    tooltip.innerHTML = `<b>${d.decade} (decade avg)</b><br>mean weight: <b>${d.mean.toFixed(2)} lb</b> ± ${d.se.toFixed(3)}<br>n = ${d.count.toLocaleString()} catches`;
-  });
-  hit.addEventListener('mouseleave', ()=>{ tooltip.style.opacity = 0; });
-  svg.appendChild(hit);
-});
-
-// ---- foreground layer: individual year mean weight, bars ----
-const barSlotY = plotW / (xMaxYr - xMinYr + 1);
-const peakYearIdx = yearData.reduce((best,d,i,arr)=> d.mean>arr[best].mean ? i : best, 0);
-
-yearData.forEach((d,i)=>{
-  const cx = xScaleYr(d.year) + barSlotY/2;
-  const barWY = Math.max(barSlotY*0.7, 1);
-  const x0 = cx - barWY/2;
-  const yTop = yScale(d.mean);
-  const yBase = yScale(0);
-
-  const bar = el('rect', {x:x0, y:yTop, width:barWY, height:(yBase-yTop), class:'bar'+(i===peakYearIdx?' bar-peak':'')});
-  svg.appendChild(bar);
-
-  const hit = el('rect', {x: xScaleYr(d.year), y:marginT, width:barSlotY, height:plotH, fill:'transparent', style:'cursor:pointer'});
-  hit.addEventListener('mousemove', ()=>{
-    const rect = wrap.getBoundingClientRect();
-    const scale = rect.width / W;
-    tooltip.style.left = cx*scale + 'px';
-    tooltip.style.top = (yTop*scale - 8) + 'px';
-    tooltip.style.opacity = 1;
-    tooltip.innerHTML = `<b>${d.year}</b><br>mean weight: <b>${d.mean.toFixed(2)} lb</b><br>${d.count} fish`;
-  });
-  hit.addEventListener('mouseleave', ()=>{ tooltip.style.opacity = 0; });
-  svg.appendChild(hit);
-});
-
-// ---- decade SE whiskers, mean ticks, and the peak-decade badge, drawn last so they
-//      stay visible on top of the (narrower, taller) individual year bars ----
-data.forEach((d,i)=>{
-  const x0 = xScaleYr(d.yrStart);
-  const x1 = xScaleYr(d.yrEnd+1);
-  const cx = (x0+x1)/2;
-  const yTop = yScale(d.mean);
   const yErrTop = yScale(d.mean + d.se);
   const yErrBot = yScale(d.mean - d.se);
 
+  const bar = el('rect', {
+    x:x0, y:yTop, width:barW, height:(yBase-yTop),
+    rx:2,
+    class: 'bar' + (i===peakIdx ? ' bar-peak' : ''),
+    'data-i': i
+  });
+  svg.appendChild(bar);
+
+  // error whisker
   svg.appendChild(el('line', {x1:cx, x2:cx, y1:yErrTop, y2:yErrBot, class:'whisker'}));
   svg.appendChild(el('line', {x1:cx-6, x2:cx+6, y1:yErrTop, y2:yErrTop, class:'whisker'}));
   svg.appendChild(el('line', {x1:cx-6, x2:cx+6, y1:yErrBot, y2:yErrBot, class:'whisker'}));
   svg.appendChild(el('circle', {cx:cx, cy:yTop, r:3.2, class:'mean-tick'}));
+
+  // decade label
+  const lbl = el('text', {x:cx, y:H-marginB+20, class:'decade-label', 'text-anchor':'middle'});
+  lbl.textContent = d.decade;
+  svg.appendChild(lbl);
 
   if(i===peakIdx){
     const bw=44, bh=16;
@@ -1648,6 +1388,103 @@ data.forEach((d,i)=>{
     pt.textContent = 'PEAK';
     svg.appendChild(pt);
   }
+
+  // hover target (invisible, full slot height for easy hover)
+  const hit = el('rect', {x: marginL+slot*i, y:marginT, width:slot, height:plotH, fill:'transparent', style:'cursor:pointer'});
+  hit.addEventListener('mousemove', (ev)=>{
+    const rect = wrap.getBoundingClientRect();
+    const scale = rect.width / W;
+    tooltip.style.left = (marginL + slot*i + slot/2)*scale + 'px';
+    tooltip.style.top = (yTop*scale - 6) + 'px';
+    tooltip.style.opacity = 1;
+    tooltip.innerHTML = `<b>${d.decade}</b><br>mean: <b>${d.mean.toFixed(2)} lb</b> ± ${d.se.toFixed(3)}<br>n = ${d.count.toLocaleString()} catches`;
+  });
+  hit.addEventListener('mouseleave', ()=>{ tooltip.style.opacity = 0; });
+  svg.appendChild(hit);
+});
+
+// ================= MEAN WEIGHT, BY YEAR (with decade background) =================
+const svg2 = document.getElementById('weightYearSvg');
+const tooltip2 = document.getElementById('tooltip2');
+const wrap2 = document.getElementById('weightYearWrap');
+
+const W2 = 980, H2 = 420;
+const mL2 = 56, mR2 = 20, mT2 = 16, mB2 = 44;
+const pW2 = W2 - mL2 - mR2;
+const pH2 = H2 - mT2 - mB2;
+
+const xMinYr = 1924, xMaxYr = 2025;
+const xScaleYr = v => mL2 + ( (v-xMinYr)/(xMaxYr-xMinYr) ) * pW2;
+
+const yMinW = 0, yMaxW = 46;
+const yScaleW = v => mT2 + pH2 - ( (v-yMinW)/(yMaxW-yMinW) ) * pH2;
+
+[0,10,20,30,40].forEach(v=>{
+  const y = yScaleW(v);
+  svg2.appendChild(el('line', {x1:mL2, x2:W2-mR2, y1:y, y2:y, class:'axis-line'}));
+  const t = el('text', {x:mL2-10, y:y+3, class:'axis-label', 'text-anchor':'end'});
+  t.textContent = v;
+  svg2.appendChild(t);
+});
+[1930,1950,1970,1990,2010].forEach(v=>{
+  const x = xScaleYr(v);
+  const t = el('text', {x:x, y:H2-mB2+20, class:'axis-label', 'text-anchor':'middle'});
+  t.textContent = v;
+  svg2.appendChild(t);
+});
+
+// 30lb qualifying reference
+const qy2 = yScaleW(30);
+svg2.appendChild(el('line', {x1:mL2, x2:W2-mR2, y1:qy2, y2:qy2, class:'qual-line'}));
+const ql2 = el('text', {x: W2-mR2, y: qy2-6, class:'qual-label', 'text-anchor':'end'});
+ql2.textContent = 'qualifying minimum';
+svg2.appendChild(ql2);
+
+// ---- background: decade average, spanning each decade's year range ----
+data.forEach(d=>{
+  const x0 = xScaleYr(d.yrStart);
+  const x1 = xScaleYr(d.yrEnd+1);
+  const yTop = yScaleW(d.mean);
+  const yBase = yScaleW(0);
+  const rect = el('rect', {x:x0, y:yTop, width:(x1-x0), height:(yBase-yTop), fill:'var(--brass)', opacity:0.18});
+  svg2.appendChild(rect);
+
+  const hit = el('rect', {x:x0, y:mT2, width:(x1-x0), height:pH2, fill:'transparent', style:'cursor:pointer'});
+  hit.addEventListener('mousemove', ()=>{
+    const rect2 = wrap2.getBoundingClientRect();
+    const scale = rect2.width / W2;
+    tooltip2.style.left = ((x0+x1)/2)*scale + 'px';
+    tooltip2.style.top = (yTop*scale - 8) + 'px';
+    tooltip2.style.opacity = 1;
+    tooltip2.innerHTML = `<b>${d.decade} (decade avg)</b><br>mean weight: <b>${d.mean.toFixed(2)} lb</b> ± ${d.se.toFixed(3)}<br>n = ${d.count.toLocaleString()} catches`;
+  });
+  hit.addEventListener('mouseleave', ()=>{ tooltip2.style.opacity = 0; });
+  svg2.appendChild(hit);
+});
+
+// ---- foreground: annual mean weight, line + dots ----
+let wPath = '';
+yearData.forEach((d,i)=>{
+  const x = xScaleYr(d.year), y = yScaleW(d.mean);
+  wPath += (i===0 ? 'M' : 'L') + x + ',' + y + ' ';
+});
+svg2.appendChild(el('path', {d:wPath.trim(), fill:'none', stroke:'var(--brass)', 'stroke-width':1.6, opacity:0.9}));
+
+yearData.forEach((d)=>{
+  const x = xScaleYr(d.year), y = yScaleW(d.mean);
+  svg2.appendChild(el('circle', {cx:x, cy:y, r:3.2, fill:'var(--brass)', stroke:'var(--tide-deep)', 'stroke-width':0.6}));
+
+  const hit = el('circle', {cx:x, cy:y, r:8, fill:'transparent', style:'cursor:pointer'});
+  hit.addEventListener('mousemove', ()=>{
+    const rect2 = wrap2.getBoundingClientRect();
+    const scale = rect2.width / W2;
+    tooltip2.style.left = x*scale + 'px';
+    tooltip2.style.top = (y*scale - 10) + 'px';
+    tooltip2.style.opacity = 1;
+    tooltip2.innerHTML = `<b>${d.year}</b><br>mean weight: <b>${d.mean.toFixed(2)} lb</b><br>${d.count} fish`;
+  });
+  hit.addEventListener('mouseleave', ()=>{ tooltip2.style.opacity = 0; });
+  svg2.appendChild(hit);
 });
 
 // ================= FISH CAUGHT, BY YEAR (with decade background) =================
@@ -1847,7 +1684,7 @@ function normalize(name){
 
 /* ---------- build angler + guide indices (one pass) ---------- */
 const anglerIndex = new Map(); // normKey -> {display, variants:Map(name->count), count, weight, weightCount, years:[], cities:Map, guides:Map, catches:[]}
-const guideIndex = new Map(); // normKey -> {display, variants:Map, count, weight, weightCount, years:[], anglers:Map, catches:[]}
+const guideIndex = new Map(); // normKey -> {display, variants:Map, count, years:[]}
 
 CATCHES.forEach(row=>{
   const [name, year, decade, weight, city, prov, country, guide, lure, date, fishNo] = row;
@@ -1869,14 +1706,11 @@ CATCHES.forEach(row=>{
   if (guide){
     const gkey = normalize(guide);
     if (gkey){
-      if (!guideIndex.has(gkey)) guideIndex.set(gkey, {variants:new Map(), count:0, weight:0, weightCount:0, years:[], anglers:new Map(), catches:[]});
+      if (!guideIndex.has(gkey)) guideIndex.set(gkey, {variants:new Map(), count:0, years:[]});
       const g = guideIndex.get(gkey);
       g.variants.set(guide, (g.variants.get(guide)||0)+1);
       g.count++;
-      if (weight!==null && weight!==undefined){ g.weight += weight; g.weightCount++; }
       if (year) g.years.push(+year);
-      if (name) g.anglers.set(name, (g.anglers.get(name)||0)+1);
-      g.catches.push({year,weight,city,prov,country,angler:name,lure,date,fishNo});
     }
   }
 });
@@ -1911,46 +1745,6 @@ guideIndex.forEach(g=>{
   g.display = best;
 });
 
-// ---- % of each season's catch that each angler/guide accounted for ----
-// Denominator: ALL qualifying catches logged that year (every angler, whether or not
-// a guide was recorded) -- matches the club-wide "Fish caught, by year" figures.
-const YEAR_TOTALS = new Map();
-CATCHES.forEach(row=>{
-  const yr = row[1] ? +row[1] : null;
-  if (yr) YEAR_TOTALS.set(yr, (YEAR_TOTALS.get(yr)||0)+1);
-});
-
-function computeShareOfCatch(entry){
-  const yearCounts = new Map();
-  entry.catches.forEach(c=>{ if (c.year) yearCounts.set(+c.year, (yearCounts.get(+c.year)||0)+1); });
-
-  const yearPct = new Map(); // year -> % of that year's total catch
-  yearCounts.forEach((cnt,yr)=>{
-    const total = YEAR_TOTALS.get(yr);
-    if (total) yearPct.set(yr, cnt/total*100);
-  });
-  entry.yearPct = yearPct;
-
-  // overall mean: plain average of the yearly % figures across every year active
-  const allPct = Array.from(yearPct.values());
-  entry.overallMeanPct = allPct.length ? allPct.reduce((a,b)=>a+b,0)/allPct.length : null;
-
-  // decadal mean: plain average of the yearly % figures, grouped by decade
-  const decadeBuckets = new Map();
-  yearPct.forEach((pct,yr)=>{
-    const decLbl = (Math.floor(yr/10)*10) + 's';
-    if (!decadeBuckets.has(decLbl)) decadeBuckets.set(decLbl, []);
-    decadeBuckets.get(decLbl).push(pct);
-  });
-  entry.decadeMeanPct = new Map();
-  decadeBuckets.forEach((arr,decLbl)=>{
-    entry.decadeMeanPct.set(decLbl, arr.reduce((a,b)=>a+b,0)/arr.length);
-  });
-}
-guideIndex.forEach(computeShareOfCatch);
-anglerIndex.forEach(computeShareOfCatch);
-
-
 function yearRangeLabel(years){
   if (!years || years.length===0) return '';
   const min = Math.min(...years), max = Math.max(...years);
@@ -1982,33 +1776,6 @@ function aggregateRange(fromYear, toYear, subjectType){
     const m = map.get(key);
     m.count++;
     if (weight!==null && weight!==undefined){ m.weight += weight; m.weightCount++; }
-  });
-  return map;
-}
-
-/* mean share-of-season's-catch over any [fromYear,toYear] range, for anglers or guides,
-   built from each entry's precomputed yearPct map (plain average of the yearly %s, same
-   definition used in the profile's decadal/overall figures) */
-function aggregatePctRange(fromYear, toYear, subjectType){
-  const idx = subjectType==='angler' ? anglerIndex : guideIndex;
-  const map = new Map(); // key -> {meanPct, nYears, ownCatches, totalWhileActive}
-  idx.forEach((entry, key)=>{
-    const vals = [];
-    const activeYears = [];
-    entry.yearPct.forEach((pct, yr)=>{
-      if (yr>=fromYear && yr<=toYear){ vals.push(pct); activeYears.push(yr); }
-    });
-    if (!vals.length) return;
-    let ownCatches = 0;
-    entry.catches.forEach(c=>{
-      const yr = c.year ? +c.year : null;
-      if (yr!==null && yr>=fromYear && yr<=toYear) ownCatches++;
-    });
-    // Z: club-wide total across exactly the years this person was active (not the whole range)
-    let totalWhileActive = 0;
-    activeYears.forEach(yr=>{ totalWhileActive += (YEAR_TOTALS.get(yr)||0); });
-    const meanPct = vals.reduce((a,b)=>a+b,0)/vals.length;
-    map.set(key, {meanPct, nYears: vals.length, ownCatches, totalWhileActive});
   });
   return map;
 }
@@ -2146,142 +1913,6 @@ function renderProfile(key, a){
   profile.scrollIntoView && profile.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
-/* ---------- guide search (mirrors angler search above) ---------- */
-const gSearchInput = $('#guideSearchInput');
-const gSuggestionsEl = $('#guideSuggestions');
-const gClearBtn = $('#guideClearBtn');
-let gHlIndex = -1;
-let currentGuideSuggestions = [];
-
-function doGuideSearch(q){
-  const nq = normalize(q);
-  if (!nq){ gSuggestionsEl.classList.remove('show'); return; }
-  const matches = [];
-  guideIndex.forEach((g,key)=>{
-    if (key.includes(nq)) matches.push([key,g]);
-  });
-  matches.sort((a,b)=> b[1].count - a[1].count);
-  currentGuideSuggestions = matches.slice(0,8);
-  renderGuideSuggestions();
-}
-
-function renderGuideSuggestions(){
-  gHlIndex = -1;
-  if (currentGuideSuggestions.length===0){
-    gSuggestionsEl.innerHTML = '<div class="sugg-empty">No guide matches that search.</div>';
-    gSuggestionsEl.classList.add('show');
-    return;
-  }
-  gSuggestionsEl.innerHTML = currentGuideSuggestions.map(([key,g],i)=>`
-    <div class="sugg-item" data-key="${key}" data-i="${i}">
-      <span class="sugg-name">${esc(g.display)}</span>
-      <span class="sugg-count">${g.count} tyee</span>
-    </div>
-  `).join('');
-  gSuggestionsEl.classList.add('show');
-  $$('.sugg-item', gSuggestionsEl).forEach(el=>{
-    el.addEventListener('click', ()=> selectGuide(el.dataset.key));
-  });
-}
-
-gSearchInput.addEventListener('input', (e)=>{
-  gClearBtn.classList.toggle('show', !!e.target.value);
-  doGuideSearch(e.target.value);
-});
-gSearchInput.addEventListener('keydown', (e)=>{
-  if (!gSuggestionsEl.classList.contains('show')) return;
-  if (e.key==='ArrowDown'){ e.preventDefault(); gHlIndex = Math.min(gHlIndex+1, currentGuideSuggestions.length-1); updateGuideHl(); }
-  else if (e.key==='ArrowUp'){ e.preventDefault(); gHlIndex = Math.max(gHlIndex-1, 0); updateGuideHl(); }
-  else if (e.key==='Enter'){ e.preventDefault(); if (currentGuideSuggestions[gHlIndex]) selectGuide(currentGuideSuggestions[gHlIndex][0]); else if(currentGuideSuggestions[0]) selectGuide(currentGuideSuggestions[0][0]); }
-});
-function updateGuideHl(){
-  $$('.sugg-item', gSuggestionsEl).forEach((el,i)=> el.classList.toggle('hl', i===gHlIndex));
-}
-gClearBtn.addEventListener('click', ()=>{
-  gSearchInput.value=''; gClearBtn.classList.remove('show'); gSuggestionsEl.classList.remove('show');
-  $('#guideProfile').classList.remove('show');
-  gSearchInput.focus();
-});
-document.addEventListener('click', (e)=>{
-  if (!e.target.closest('#sec-guide .searchwrap')) gSuggestionsEl.classList.remove('show');
-});
-
-function selectGuide(key){
-  const g = guideIndex.get(key);
-  if (!g) return;
-  gSearchInput.value = g.display;
-  gSuggestionsEl.classList.remove('show');
-  gClearBtn.classList.add('show');
-  renderGuideProfile(key, g);
-}
-
-function renderGuideProfile(key, g){
-  const profile = $('#guideProfile');
-  profile.classList.add('show');
-  const avgW = g.weightCount ? (g.weight / g.weightCount) : null;
-  const minYear = g.years.length ? Math.min(...g.years) : null;
-  const maxYear = g.years.length ? Math.max(...g.years) : null;
-  let topAngler = null, topAnglerN = 0;
-  g.anglers.forEach((n,an)=>{ if(n>topAnglerN){topAnglerN=n; topAngler=an;} });
-
-  const decadeCounts = {};
-  CATCHES.forEach(row=>{
-    if (row[7] && normalize(row[7])===key && row[2]) decadeCounts[row[2]] = (decadeCounts[row[2]]||0)+1;
-  });
-
-  const variantNote = g.variants.size>1
-    ? `Recorded under ${g.variants.size} name variants in the ledger: ${Array.from(g.variants.keys()).join(', ')}`
-    : '';
-
-  const sortedCatches = g.catches.slice().sort((x,y)=> (x.date||'').localeCompare(y.date||''));
-
-  profile.innerHTML = `
-    <div class="profile-card">
-      <div class="profile-head">
-        <div>
-          <h2>${esc(g.display)}</h2>
-          ${variantNote ? `<div class="variants">${esc(variantNote)}</div>` : ''}
-        </div>
-      </div>
-      <div class="profile-stats">
-        <div class="pstat"><div class="num">${fmt(g.count)}</div><div class="lbl">Tyee Guided</div></div>
-        <div class="pstat"><div class="num">${g.weightCount ? fmt1(g.weight)+' lb' : '—'}</div><div class="lbl">Combined Weight</div></div>
-        <div class="pstat"><div class="num">${avgW ? avgW.toFixed(1)+' lb' : '—'}</div><div class="lbl">Average Weight</div></div>
-        <div class="pstat"><div class="num">${minYear ? minYear+'–'+maxYear : '—'}</div><div class="lbl">Active Seasons</div></div>
-        <div class="pstat"><div class="num">${g.overallMeanPct!==null ? g.overallMeanPct.toFixed(1)+'%' : '—'}</div><div class="lbl">Avg. Share of Season's Catch</div></div>
-        ${topAngler ? `<div class="pstat"><div class="num" style="font-size:15px;">${esc(topAngler)}</div><div class="lbl">Most-Guided Angler (${topAnglerN}×)</div></div>` : ''}
-      </div>
-      <div class="decade-mini">
-        ${Object.keys(decadeCounts).sort().map(d=>{
-          const dp = g.decadeMeanPct.get(d);
-          return `<div class="decade-chip">${esc(d)}: <b>${decadeCounts[d]}</b>${dp!==undefined ? ` · ${dp.toFixed(1)}% avg` : ''}</div>`;
-        }).join('')}
-      </div>
-      <p class="note" style="color:var(--sage); font-size:13px; margin:-6px 0 16px;">"Share of season's catch" is the % of that year's total qualifying catches (all anglers, all guides) this guide landed. Decade and overall figures are the plain average of those yearly %s across the years shown.</p>
-      <div class="tablewrap">
-        <table class="catchtable">
-          <thead><tr><th>Date</th><th class="num">Weight</th><th>Angler</th><th>City / Prov</th><th>Lure</th><th class="num">Share of Yr</th></tr></thead>
-          <tbody>
-            ${sortedCatches.map(c=>{
-              const yp = c.year ? g.yearPct.get(+c.year) : undefined;
-              return `
-              <tr>
-                <td>${esc(c.date)||'—'}</td>
-                <td class="num">${c.weight!==null&&c.weight!==undefined ? c.weight.toFixed(1)+' lb' : '—'}</td>
-                <td>${esc(c.angler)||'—'}</td>
-                <td>${esc([c.city,c.prov].filter(Boolean).join(', '))||'—'}</td>
-                <td>${esc(c.lure)||'—'}</td>
-                <td class="num">${yp!==undefined ? yp.toFixed(1)+'%' : '—'}</td>
-              </tr>
-            `;}).join('')}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-  profile.scrollIntoView && profile.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
-
 /* ---------- leaderboards ---------- */
 function ledgerRows(container, pairs, opts={}){
   container.innerHTML = '';
@@ -2302,9 +1933,12 @@ function ledgerRows(container, pairs, opts={}){
       <div class="barwrap"><div class="bar" style="width:${pct}%"></div></div>
       <div class="rowval">${opts.fmt ? opts.fmt(val) : fmt(val)}</div>
     `;
-    if (clickable && opts.onSelect){
+    if (clickable){
       row.addEventListener('click', ()=>{
-        opts.onSelect(key, name);
+        searchInput.value = name;
+        clearBtn.classList.add('show');
+        const a = anglerIndex.get(key);
+        if (a) renderProfile(key, a);
         window.scrollTo({top:0, behavior:'smooth'});
       });
     }
@@ -2316,10 +1950,7 @@ function buildLeaderboard(panelId, opts){
   // opts: { subjectType:'angler'|'guide', metric:'count'|'weight', note }
   const { subjectType, metric, note } = opts;
   const index = subjectType==='guide' ? guideIndex : anglerIndex;
-  const clickable = true;
-  const onSelect = subjectType==='guide'
-    ? (key)=>{ const g = guideIndex.get(key); if (g){ gSearchInput.value = g.display; gClearBtn.classList.add('show'); renderGuideProfile(key, g); } }
-    : (key)=>{ const a = anglerIndex.get(key); if (a){ searchInput.value = a.display; clearBtn.classList.add('show'); renderProfile(key, a); } };
+  const clickable = subjectType==='angler';
   const panel = $('#'+panelId);
   panel.innerHTML = `
     <div class="card">
@@ -2377,24 +2008,6 @@ function buildLeaderboard(panelId, opts){
 
   function renderRange(from, to, titleText, limit){
     titleEl.textContent = titleText;
-
-    if (metric==='pct'){
-      const map = aggregatePctRange(from, to, subjectType);
-      let pairs = Array.from(map.entries()).map(([key,v])=>{
-        const idx = index.get(key);
-        const display = idx ? idx.display : key;
-        const years = idx ? yearRangeLabel(idx.years) : '';
-        const flag = (subjectType==='angler' && idx) ? idx.flag : '';
-        const verb = subjectType==='guide' ? 'rowed' : 'caught';
-        const sub = `${v.nYears} yr${v.nYears===1?'':'s'} active \u00b7 ${fmt(v.ownCatches)} of ${fmt(v.totalWhileActive)} tyee ${verb}`;
-        return [display, v.meanPct, key, sub, years, flag];
-      });
-      pairs.sort((a,b)=>b[1]-a[1]);
-      pairs = pairs.slice(0, limit);
-      ledgerRows(rowsHost, pairs, {fmt: v => v.toFixed(1)+'%', clickable, onSelect});
-      return;
-    }
-
     const map = aggregateRange(from, to, subjectType);
     let pairs = Array.from(map.entries()).map(([key,v])=>{
       const idx = index.get(key);
@@ -2408,37 +2021,25 @@ function buildLeaderboard(panelId, opts){
     if (metric==='weight') pairs = pairs.filter(p=>p[1]>0);
     pairs.sort((a,b)=>b[1]-a[1]);
     pairs = pairs.slice(0, limit);
-    ledgerRows(rowsHost, pairs, {fmt: v => metric==='weight' ? fmt1(v)+' lb' : fmt(v)+' tyee', clickable, onSelect});
+    ledgerRows(rowsHost, pairs, {fmt: v => metric==='weight' ? fmt1(v)+' lb' : fmt(v)+' tyee', clickable});
   }
 
   renderRange(YEAR_MIN, YEAR_MAX, 'All Time Leaderboard', 15);
 }
 
-/* ---------- leaderboard tabs ----------
-   Each nav only toggles the .lb-panel elements within its own section, since
-   the Angler and Guide tabs each have their own two-panel nav sharing the
-   same class names. */
-function initLbNav(navId){
-  const nav = $('#'+navId);
-  if (!nav) return;
-  const scope = nav.closest('.app') || document;
-  $$('.tab-btn', nav).forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      $$('.tab-btn', nav).forEach(b=>b.classList.toggle('active', b===btn));
-      const lb = btn.dataset.lb;
-      $$('.lb-panel', scope).forEach(p=> p.classList.toggle('active', p.id==='lb-'+lb));
-    });
+/* ---------- leaderboard tabs ---------- */
+$$('.tab-btn', $('#lbTabs')).forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    $$('.tab-btn', $('#lbTabs')).forEach(b=>b.classList.toggle('active', b===btn));
+    const lb = btn.dataset.lb;
+    $$('.lb-panel').forEach(p=> p.classList.toggle('active', p.id==='lb-'+lb));
   });
-}
-initLbNav('lbTabs');
-initLbNav('guideLbTabs');
+});
 
 buildLeaderboard('lb-angler-count', {subjectType:'angler', metric:'count', note:'Click any angler to see their full record.'});
 buildLeaderboard('lb-angler-weight', {subjectType:'angler', metric:'weight', note:'Click any angler to see their full record.'});
-buildLeaderboard('lb-angler-pct', {subjectType:'angler', metric:'pct', note:"Each angler's average share of a season's total catch over the range selected. Small-sample seasons can rank high on very few fish; check the years-active count alongside the %."});
-buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:"Each guide's average share of a season's total catch over the range selected — the same figure shown on their profile. Small-sample seasons can rank high on very few fish; check the years-active count alongside the %."});
-buildLeaderboard('lb-guide-count', {subjectType:'guide', metric:'count', note:'Click any guide to see their full record.'});
-buildLeaderboard('lb-guide-weight', {subjectType:'guide', metric:'weight', note:'Click any guide to see their full record.'});
+buildLeaderboard('lb-guide-count', {subjectType:'guide', metric:'count', note:"Search a guide, e.g. Eric Vogt. Oh wait, he hasn't registered yet. Try someone else."});
+buildLeaderboard('lb-guide-weight', {subjectType:'guide', metric:'weight', note:"Search a guide, e.g. Eric Vogt. Oh wait, he hasn't registered yet. Try someone else."});
 
 })();
 </script>
