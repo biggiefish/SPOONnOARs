@@ -112,70 +112,6 @@ nav.tyee-navbar{
 .tyee-section{display:none;}
 .tyee-section.active{display:block;}
 
-/* ---------- Catch History sub-nav (Angler / Guide / Solo) ---------- */
-.catchhist-section{display:none;}
-.catchhist-section.active{display:block;}
-.catchhist-subnav{
-  max-width:1180px;
-  margin:0 auto;
-  padding:20px 28px 0;
-}
-.catchhist-subnav-scroll{
-  display:flex;
-  gap:4px;
-  overflow-x:auto;
-  scrollbar-width:none;
-  border-bottom:1px solid var(--hairline);
-}
-.catchhist-subnav-scroll::-webkit-scrollbar{display:none;}
-.catchhist-subtab{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:12.5px;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  background:transparent;
-  color:var(--ink-dim);
-  border:none;
-  border-bottom:2px solid transparent;
-  padding:10px 18px 9px;
-  cursor:pointer;
-  white-space:nowrap;
-  transition:all .15s ease;
-}
-.catchhist-subtab:hover{color:var(--ink);}
-.catchhist-subtab.active{
-  color:var(--copper);
-  border-bottom:2px solid var(--copper);
-  font-weight:600;
-}
-@media (max-width:480px){
-  .catchhist-subnav{padding:16px 16px 0;}
-  .catchhist-subtab{padding:9px 13px 8px; font-size:11.5px;}
-}
-
-/* ---------- Catch Trends (placeholder) ---------- */
-#sec-catchtrends{padding:8px 28px 70px;}
-#sec-catchtrends .ct-wrap{max-width:760px; margin:0 auto;}
-#sec-catchtrends .ct-badge{
-  display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em;
-  text-transform:uppercase; background:var(--panel-raised); color:var(--copper);
-  border:1px solid var(--hairline); padding:5px 12px; border-radius:999px; margin:22px 0 18px;
-}
-#sec-catchtrends .ct-eyebrow{
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--brass); margin-bottom:14px;
-}
-#sec-catchtrends h1{
-  font-family:'Fraunces',serif; font-weight:600; font-size:clamp(24px,3.6vw,36px); line-height:1.15;
-  margin:0 0 14px; letter-spacing:-0.01em;
-}
-#sec-catchtrends .ct-sub{ color:var(--ink-dim); font-size:15px; line-height:1.65; max-width:620px; margin:0 0 30px; }
-#sec-catchtrends .ct-card{ background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:26px 28px; margin-bottom:20px; }
-#sec-catchtrends .ct-card h2{ font-family:'Fraunces',serif; font-size:17px; font-weight:600; margin:0 0 14px; color:var(--ink); }
-#sec-catchtrends .ct-card ul{ margin:0; padding-left:20px; color:var(--ink-dim); font-size:14px; line-height:1.95; }
-#sec-catchtrends .ct-card li strong{ color:var(--ink); }
-#sec-catchtrends .ct-note{ color:var(--ink-faint); font-size:12.5px; font-family:'IBM Plex Mono',monospace; margin-top:26px; }
-
 footer.tyee-footer{
   max-width:1180px;
   margin:0 auto;
@@ -1005,222 +941,26 @@ footer.tyee-footer{
 #sec-guide .empty-state p{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; margin:0; }
 #sec-guide footer.foot{ margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--sage); font-size:12.5px; font-family:'IBM Plex Mono',monospace; }
 @media (max-width:640px){#sec-guide .hero{ padding:32px 20px 26px; }#sec-guide .ledger-row{ grid-template-columns:24px 1fr 60px 56px; gap:8px; }#sec-guide .card{ padding:18px; }#sec-guide .profile-card{ padding:20px; }#sec-guide .tab-btn{ font-size:13px; padding:9px 14px 10px; }#sec-guide .rangebox{ padding:10px 12px; gap:8px; }#sec-guide .rangebox input[type="number"]{ width:66px; }}
-/* ===== Solo Catch History section (mirrors Angler Catch History; self-guided anglers) ===== */
-
-#sec-solo{
-  --ink:#ECE3D0; --paper:#0F1E23; --paper-dim:#17282E; --paper-deep:#0B171B;
-  --deep-water:#0F1E23; --deep-water-2:#0B171B;
-  --brass:#CDA53A; --brass-light:#E3C36B; --copper:#CD7C46; --copper-dim:#8A5834;
-  --sage:#8FA8AC; --line:rgba(236,227,208,0.16); --white-ink:#1E343B;
-  --shadow: 0 2px 10px rgba(0,0,0,0.35);
-}
-
-#sec-solo *{box-sizing:border-box;}
-#sec-solo{margin:0;padding:0;}
-#sec-solo{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Inter',sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-#sec-solo .app{max-width:980px;margin:0 auto;padding:0 24px 80px;}
-#sec-solo .hero{
-  position:relative;
-  background:radial-gradient(1200px 400px at 20% -10%, #1E343B 0%, var(--deep-water) 55%, var(--deep-water-2) 100%);
-  color:var(--ink);
-  border-radius:0 0 18px 18px;
-  padding:44px 40px 34px;
-  margin:0 -24px 28px;
-  overflow:hidden;
-}
-#sec-solo .hero::before{
-  content:"";
-  position:absolute; inset:0;
-  opacity:0.16;
-  background-image:
-    repeating-radial-gradient(circle at 85% 20%, transparent 0, transparent 18px, rgba(212,184,118,0.5) 19px, transparent 20px, transparent 42px);
-  pointer-events:none;
-}
-#sec-solo .eyebrow{
-  font-family:'IBM Plex Mono',monospace;
-  letter-spacing:0.16em;
-  text-transform:uppercase;
-  font-size:12px;
-  color:var(--brass-light);
-  margin:0 0 12px;
-  position:relative;
-}
-#sec-solo .hero h1{
-  font-family:'Fraunces',serif;
-  font-weight:600;
-  font-size:clamp(26px,4.4vw,40px);
-  line-height:1.08;
-  margin:0 0 8px;
-  max-width:680px;
-  position:relative;
-}
-#sec-solo .hero p.sub{
-  font-family:'Fraunces',serif;
-  font-style:italic;
-  font-weight:500;
-  color:#CFE3DE;
-  font-size:15.5px;
-  max-width:560px;
-  margin:0;
-  position:relative;
-}
-#sec-solo .searchwrap{ margin:26px 0 30px; position:relative; }
-#sec-solo .searchbox{
-  display:flex; align-items:center; gap:10px;
-  background:var(--white-ink);
-  border:2px solid var(--brass);
-  border-radius:12px;
-  padding:6px 8px 6px 18px;
-  box-shadow:var(--shadow);
-}
-#sec-solo .searchbox svg{ flex:0 0 auto; color:var(--sage); }
-#sec-solo .searchbox input{
-  flex:1; border:none; outline:none; background:transparent;
-  font-family:'Fraunces',serif; font-size:19px; color:var(--ink); padding:10px 4px;
-}
-#sec-solo .searchbox input::placeholder{ color:#8FA8AC; font-style:italic; }
-#sec-solo .searchbox .clearbtn{
-  border:none; background:var(--paper-dim); color:var(--sage);
-  width:28px; height:28px; border-radius:50%; cursor:pointer; font-size:15px;
-  display:none; align-items:center; justify-content:center;
-}
-#sec-solo .searchbox .clearbtn.show{ display:flex; }
-#sec-solo .suggestions{
-  position:absolute; top:calc(100% + 6px); left:0; right:0;
-  background:var(--white-ink); border:1px solid var(--line); border-radius:10px;
-  box-shadow:var(--shadow); overflow:hidden; z-index:20; display:none;
-}
-#sec-solo .suggestions.show{ display:block; }
-#sec-solo .sugg-item{
-  padding:11px 18px; cursor:pointer; display:flex; justify-content:space-between; align-items:baseline;
-  border-bottom:1px solid var(--line);
-}
-#sec-solo .sugg-item:last-child{ border-bottom:none; }
-#sec-solo .sugg-item:hover, #sec-solo .sugg-item.hl{ background:var(--paper-dim); }
-#sec-solo .sugg-name{ font-family:'Fraunces',serif; font-size:15px; color:var(--ink); }
-#sec-solo .sugg-count{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--copper); white-space:nowrap; margin-left:12px; }
-#sec-solo .sugg-empty{ padding:16px 18px; color:var(--sage); font-size:13.5px; font-style:italic; }
-#sec-solo .profile{ display:none; }
-#sec-solo .profile.show{ display:block; }
-#sec-solo .profile-card{
-  background:var(--white-ink); border:1px solid var(--line); border-radius:14px;
-  box-shadow:var(--shadow); padding:26px 28px; margin-bottom:30px;
-}
-#sec-solo .profile-head{ display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:18px; }
-#sec-solo .profile-head h2{
-  font-family:'Fraunces',serif; font-weight:600; font-size:26px; margin:0; color:var(--ink);
-}
-#sec-solo .profile-head .variants{ font-size:12.5px; color:var(--sage); margin-top:4px; font-style:italic; }
-#sec-solo .profile-stats{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
-#sec-solo .pstat{ background:var(--paper-dim); border:1px solid var(--line); border-radius:9px; padding:10px 16px; min-width:110px; }
-#sec-solo .pstat .num{ font-family:'IBM Plex Mono',monospace; font-size:20px; font-weight:600; color:var(--copper); line-height:1; }
-#sec-solo .pstat .lbl{ font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color:var(--sage); margin-top:5px; }
-#sec-solo .decade-mini{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
-#sec-solo .decade-chip{
-  font-family:'IBM Plex Mono',monospace; font-size:11.5px; background:var(--deep-water); color:var(--ink);
-  padding:4px 10px; border-radius:999px;
-}
-#sec-solo .decade-chip b{ color:var(--brass-light); }
-#sec-solo table.catchtable{ width:100%; border-collapse:collapse; font-size:13px; }
-#sec-solo table.catchtable th{
-  font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em;
-  color:var(--sage); text-align:left; padding:7px 8px; border-bottom:2px solid var(--brass);
-}
-#sec-solo table.catchtable th.num, #sec-solo table.catchtable td.num{ text-align:right; }
-#sec-solo table.catchtable td{ padding:7px 8px; border-bottom:1px solid var(--line); }
-#sec-solo table.catchtable tr:hover td{ background:var(--paper-dim); }
-#sec-solo .tablewrap{ max-height:340px; overflow-y:auto; border:1px solid var(--line); border-radius:8px; }
-#sec-solo .tabs{ display:flex; gap:6px; flex-wrap:wrap; margin:0 0 0; border-bottom:2px solid var(--brass); }
-#sec-solo .tab-btn{
-  font-family:'Fraunces',serif; font-weight:600; font-size:15px; color:var(--sage);
-  background:var(--paper-dim); border:1px solid var(--line); border-bottom:none;
-  padding:10px 20px 12px; border-radius:8px 8px 0 0; cursor:pointer; position:relative; top:2px;
-}
-#sec-solo .tab-btn:hover{ color:var(--copper); background:var(--paper-deep); }
-#sec-solo .tab-btn.active{ color:var(--copper); background:var(--paper); border-color:var(--brass); border-bottom:2px solid var(--paper); }
-#sec-solo .lb-panel{ display:none; padding-top:26px; }
-#sec-solo .lb-panel.active{ display:block; }
-#sec-solo .card{ background:var(--white-ink); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px 26px; margin-bottom:22px; }
-#sec-solo .card h3{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 4px; color:var(--ink); }
-#sec-solo .card .note{ color:var(--sage); font-size:13px; margin:0 0 16px; }
-#sec-solo .card .qualify-note{ font-style:italic; margin-top:-10px; }
-#sec-solo .pillrow{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
-#sec-solo .rangebox{
-  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
-  background:var(--paper-dim); border:1px solid var(--line); border-radius:9px;
-  padding:12px 16px; margin-bottom:18px;
-}
-#sec-solo .rangebox label{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--sage); font-family:'IBM Plex Mono',monospace; }
-#sec-solo .rangebox input[type="number"]{
-  width:78px; font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink);
-  border:1px solid var(--brass); border-radius:6px; padding:5px 8px; background:var(--white-ink);
-}
-#sec-solo .rangebox .apply-btn{
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; font-weight:600;
-  background:var(--copper); color:var(--ink); border:none; border-radius:6px;
-  padding:7px 14px; cursor:pointer;
-}
-#sec-solo .rangebox .apply-btn:hover{ background:var(--copper-dim); }
-#sec-solo .pill{
-  font-family:'IBM Plex Mono',monospace; font-size:12.5px; border:1px solid var(--brass); color:var(--ink);
-  background:transparent; padding:6px 13px; border-radius:999px; cursor:pointer;
-}
-#sec-solo .pill.active{ background:var(--copper); border-color:var(--copper); color:var(--ink); }
-#sec-solo .pill:hover:not(.active){ background:var(--paper-dim); }
-#sec-solo .pill-partial{ border-style:dashed; opacity:0.85; }
-#sec-solo .ledger-row{ display:grid; grid-template-columns:34px 1fr 120px 80px; align-items:center; gap:14px; padding:9px 0; border-bottom:1px dashed var(--line); cursor:pointer; }
-#sec-solo .ledger-row.static{ cursor:default; }
-#sec-solo .ledger-row.static:hover{ background:none; }
-#sec-solo .ledger-row:hover{ background:var(--paper-dim); }
-#sec-solo .ledger-row:last-child{ border-bottom:none; }
-#sec-solo .rank{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--brass); border:1px solid var(--brass); border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
-#sec-solo .rowname{ font-size:14.5px; font-weight:500; color:var(--ink); }
-#sec-solo .rowname .yearrange{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:400; color:var(--sage); margin-left:6px; }
-#sec-solo .rowname .sub{ display:block; font-size:11.5px; color:var(--sage); font-weight:400; margin-top:1px; }
-#sec-solo .barwrap{ background:var(--paper-dim); border-radius:5px; height:9px; overflow:hidden; }
-#sec-solo .bar{ background:linear-gradient(90deg,var(--copper-dim),var(--copper)); height:100%; border-radius:5px; }
-#sec-solo .rowval{ font-family:'IBM Plex Mono',monospace; font-size:13.5px; text-align:right; color:var(--ink); font-weight:600; }
-#sec-solo .empty-state{ text-align:center; padding:36px 20px; color:var(--sage); }
-#sec-solo .empty-state svg{ opacity:0.5; margin-bottom:10px; }
-#sec-solo .empty-state p{ font-family:'Fraunces',serif; font-style:italic; font-size:15px; margin:0; }
-#sec-solo footer.foot{ margin-top:36px; padding-top:18px; border-top:1px solid var(--line); color:var(--sage); font-size:12.5px; font-family:'IBM Plex Mono',monospace; }
-@media (max-width:640px){#sec-solo .hero{ padding:32px 20px 26px; }#sec-solo .ledger-row{ grid-template-columns:24px 1fr 60px 56px; gap:8px; }#sec-solo .card{ padding:18px; }#sec-solo .profile-card{ padding:20px; }#sec-solo .tab-btn{ font-size:13px; padding:9px 14px 10px; }#sec-solo .rangebox{ padding:10px 12px; gap:8px; }#sec-solo .rangebox input[type="number"]{ width:66px; }}
-
 </style>
 </head>
 <body>
 
 <header class="tyee-masthead">
   <div class="tyee-eyebrow">Tyee Club of British Columbia &middot; Catch Ledger, 1924&ndash;2025</div>
-  <h1>A Century on the Water &mdash; <em>Every Angle</em> of the Tyee Club Record</h1>
+  <h1>A Century on the Water &mdash; <em>Three Views</em> of the Tyee Club Record</h1>
   <p class="tyee-masthead-sub">Tyee Club of BC, Spoon'n &amp; Plug'n Oars since 1924. All information sourced from www.tyeeclub.org</p>
 </header>
 
 <nav class="tyee-navbar">
   <div class="tyee-tab-scroll" id="tyeeTabs">
-    <button class="tyee-tab active" data-target="sec-catchhistory">Catch History</button>
+    <button class="tyee-tab active" data-target="sec-catch">Angler Catch History</button>
+    <button class="tyee-tab" data-target="sec-guide">Guide Catch History</button>
     <button class="tyee-tab" data-target="sec-origin">Where Anglers Came From</button>
-    <button class="tyee-tab" data-target="sec-weight">Tyee Trends</button>
-    <button class="tyee-tab" data-target="sec-catchtrends">Catch Trends</button>
+    <button class="tyee-tab" data-target="sec-weight">Weight Trends</button>
   </div>
 </nav>
 
-<div id="sec-catchhistory" class="tyee-section active">
-
-<nav class="catchhist-subnav">
-  <div class="catchhist-subnav-scroll" id="catchHistTabs">
-    <button class="catchhist-subtab active" data-subtarget="sec-catch">Angler</button>
-    <button class="catchhist-subtab" data-subtarget="sec-guide">Guide</button>
-    <button class="catchhist-subtab" data-subtarget="sec-solo">Solo</button>
-  </div>
-</nav>
-
-<div id="sec-catch" class="catchhist-section active">
+<div id="sec-catch" class="tyee-section active">
 
 <div class="app">
 
@@ -1261,7 +1001,7 @@ footer.tyee-footer{
 
 </div>
 
-<div id="sec-guide" class="catchhist-section">
+<div id="sec-guide" class="tyee-section">
 
 <div class="app">
 
@@ -1298,50 +1038,6 @@ footer.tyee-footer{
   </footer>
 </div>
 
-
-
-</div>
-
-<div id="sec-solo" class="catchhist-section">
-
-<div class="app">
-
-  <div class="hero">
-    <p class="eyebrow">Tyee Club of British Columbia · Est. 1924</p>
-    <h1>Anglers who caught their own fish.</h1>
-    <p class="sub">Catches where the angler and the guide/rower recorded are the same person — no hired guide, just the angler on their own oars. Search a name, or browse who's led each decade.</p>
-  </div>
-
-  <div class="searchwrap">
-    <div class="searchbox">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="soloSearchInput" placeholder="Search a solo angler, e.g. Eric Vogt. Oh wait, he hasn't registered yet. Try someone else." autocomplete="off">
-      <button class="clearbtn" id="soloClearBtn">&times;</button>
-    </div>
-    <div class="suggestions" id="soloSuggestions"></div>
-  </div>
-
-  <div class="profile" id="soloProfile"></div>
-
-  <nav class="tabs" id="soloLbTabs">
-    <button class="tab-btn active" data-lb="solo-count">Solo Anglers: Most Fish</button>
-    <button class="tab-btn" data-lb="solo-weight">Solo Anglers: Combined Weight</button>
-    <button class="tab-btn" data-lb="solo-pct">Solo Anglers: Percent of Catch</button>
-    <button class="tab-btn" data-lb="solo-rate">Solo Anglers: Tyee per Season</button>
-  </nav>
-  <section class="lb-panel active" id="lb-solo-count"></section>
-  <section class="lb-panel" id="lb-solo-weight"></section>
-  <section class="lb-panel" id="lb-solo-pct"></section>
-  <section class="lb-panel" id="lb-solo-rate"></section>
-
-  <footer class="foot">
-    Source: Tyee Club of BC yearbook rosters, 1924–2025. A catch counts as "solo" when the guide/rower field recorded for that fish is the same person as the angler. Name matching normalizes punctuation/spacing the same way it does elsewhere in this ledger.
-  </footer>
-</div>
-
-
-
-</div>
 
 
 </div>
@@ -1525,32 +1221,8 @@ footer.tyee-footer{
 
 </div>
 
-
-<div id="sec-catchtrends" class="tyee-section">
-
-<div class="ct-wrap">
-  <div class="ct-eyebrow">Tyee Club of British Columbia &middot; Catch Ledger, 1924&ndash;2025</div>
-  <div class="ct-badge">In progress</div>
-  <h1>When are tyee caught &mdash; and why?</h1>
-  <p class="ct-sub">This section is under construction. It will dig into the timing of catches themselves: what time of day, tide, and season fish are landed, and which environmental conditions line up with the best (and worst) fishing.</p>
-
-  <div class="ct-card">
-    <h2>Planned analysis</h2>
-    <ul>
-      <li><strong>Solar timing</strong> &mdash; how closely morning catches cluster around sunrise, and whether evening catches show the same pattern around sunset.</li>
-      <li><strong>Weather &amp; sky</strong> &mdash; cloud cover, sea-surface temperature, wind, and barometric pressure trends in the hours before a catch, from ERA5 reanalysis data.</li>
-      <li><strong>Tide state</strong> &mdash; whether catches cluster around a particular point in the tidal cycle rather than just a particular hour.</li>
-      <li><strong>Season &amp; long-term shift</strong> &mdash; how the monthly and within-season timing of catches has moved across a century of decades, and whether that lines up with warming trends or hatchery/escapement changes explored elsewhere in this report.</li>
-    </ul>
-  </div>
-
-  <p class="ct-note">Check back soon &mdash; this tab will fill in as that analysis is finished.</p>
-</div>
-
-</div>
-
 <footer class="tyee-footer">
-  Combined report assembled from several source analyses of the Tyee Club of British Columbia catch registry (tyee_club_catch_records_master.csv), 1924&ndash;2025.
+  Combined report assembled from three source analyses of the Tyee Club of British Columbia catch registry (tyee_club_catch_records_master.csv), 1924&ndash;2025.
 </footer>
 
 <script>
@@ -2184,7 +1856,6 @@ function normalize(name){
 /* ---------- build angler + guide indices (one pass) ---------- */
 const anglerIndex = new Map(); // normKey -> {display, variants:Map(name->count), count, weight, weightCount, years:[], cities:Map, guides:Map, catches:[]}
 const guideIndex = new Map(); // normKey -> {display, variants:Map, count, weight, weightCount, years:[], anglers:Map, catches:[]}
-const soloIndex = new Map(); // normKey -> catches where the angler and the recorded guide/rower are the same person
 
 CATCHES.forEach(row=>{
   const [name, year, decade, weight, city, prov, country, guide, lure, date, fishNo] = row;
@@ -2214,20 +1885,6 @@ CATCHES.forEach(row=>{
       if (year) g.years.push(+year);
       if (name) g.anglers.set(name, (g.anglers.get(name)||0)+1);
       g.catches.push({year,weight,city,prov,country,angler:name,lure,date,fishNo});
-    }
-    // solo: the angler and the recorded guide/rower are the same person -- no hired guide
-    if (gkey && gkey===key){
-      if (!soloIndex.has(key)){
-        soloIndex.set(key, {variants:new Map(), count:0, weight:0, weightCount:0, years:[], cities:new Map(), countries:new Map(), catches:[]});
-      }
-      const s = soloIndex.get(key);
-      s.variants.set(name, (s.variants.get(name)||0)+1);
-      s.count++;
-      if (weight!==null && weight!==undefined){ s.weight += weight; s.weightCount++; }
-      if (year) s.years.push(+year);
-      if (city) s.cities.set(city, (s.cities.get(city)||0)+1);
-      if (country) s.countries.set(country, (s.countries.get(country)||0)+1);
-      s.catches.push({year,weight,city,prov,country,lure,date,fishNo});
     }
   }
 });
@@ -2260,15 +1917,6 @@ guideIndex.forEach(g=>{
   let best=null, bestN=-1;
   g.variants.forEach((n,name)=>{ if(n>bestN){bestN=n;best=name;} });
   g.display = best;
-});
-soloIndex.forEach(s=>{
-  let best=null, bestN=-1;
-  s.variants.forEach((n,name)=>{ if(n>bestN){bestN=n;best=name;} });
-  s.display = best;
-  let bestC=null, bestCN=-1;
-  s.countries.forEach((n,c)=>{ if(n>bestCN){bestCN=n;bestC=c;} });
-  s.homeCountry = bestC;
-  s.flag = countryFlag(bestC);
 });
 
 // ---- % of each season's catch that each angler/guide accounted for ----
@@ -2344,7 +1992,6 @@ function computeShareOfCatch(entry, assumeContinuous){
 }
 guideIndex.forEach(e=>computeShareOfCatch(e, true));
 anglerIndex.forEach(e=>computeShareOfCatch(e, false));
-soloIndex.forEach(e=>computeShareOfCatch(e, false));
 
 
 function yearRangeLabel(years){
@@ -2391,7 +2038,6 @@ function aggregateRange(fromYear, toYear, subjectType){
     const [name, year, decade, weight, city, prov, country, guide, lure, date, fishNo] = row;
     const y = year ? +year : null;
     if (y===null || y<fromYear || y>toYear) return;
-    if (subjectType==='solo' && (!guide || normalize(guide)!==normalize(name))) return;
     const subj = subjectType==='guide' ? guide : name;
     if (!subj) return;
     const key = normalize(subj);
@@ -2424,7 +2070,7 @@ function activeYearsInRange(entry, fromYear, toYear){
    years this entry happened to be active) -- same definition as the decadal/all-time
    figures on the profile, so a decade-pill click here reproduces g.decadeMeanPct exactly. */
 function aggregatePctRange(fromYear, toYear, subjectType){
-  const idx = subjectType==='angler' ? anglerIndex : subjectType==='solo' ? soloIndex : guideIndex;
+  const idx = subjectType==='angler' ? anglerIndex : guideIndex;
   const rangeTotal = totalInRange(fromYear, toYear); // Z: total tyee registered across the whole range
   const map = new Map(); // key -> {pct, nYears, ownCatches, rangeTotal}
   idx.forEach((entry, key)=>{
@@ -2446,7 +2092,7 @@ function aggregatePctRange(fromYear, toYear, subjectType){
    club-wide total involved, so it isn't skewed by how big or small that range's overall
    catch pool happens to be */
 function aggregateRateRange(fromYear, toYear, subjectType){
-  const idx = subjectType==='angler' ? anglerIndex : subjectType==='solo' ? soloIndex : guideIndex;
+  const idx = subjectType==='angler' ? anglerIndex : guideIndex;
   const map = new Map(); // key -> {rate, nYears, ownCatches}
   idx.forEach((entry, key)=>{
     const nYearsActive = activeYearsInRange(entry, fromYear, toYear);
@@ -2731,131 +2377,6 @@ function renderGuideProfile(key, g){
   profile.scrollIntoView && profile.scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
-
-/* ---------- solo search (mirrors angler search above; self-guided anglers) ---------- */
-const soloSearchInput = $('#soloSearchInput');
-const soloSuggestionsEl = $('#soloSuggestions');
-const soloClearBtn = $('#soloClearBtn');
-let soloHlIndex = -1;
-let currentSoloSuggestions = [];
-
-function doSoloSearch(q){
-  const nq = normalize(q);
-  if (!nq){ soloSuggestionsEl.classList.remove('show'); return; }
-  const matches = [];
-  soloIndex.forEach((s,key)=>{
-    if (key.includes(nq)) matches.push([key,s]);
-  });
-  matches.sort((a,b)=> b[1].count - a[1].count);
-  currentSoloSuggestions = matches.slice(0,8);
-  renderSoloSuggestions();
-}
-
-function renderSoloSuggestions(){
-  soloHlIndex = -1;
-  if (currentSoloSuggestions.length===0){
-    soloSuggestionsEl.innerHTML = '<div class="sugg-empty">No solo angler matches that search.</div>';
-    soloSuggestionsEl.classList.add('show');
-    return;
-  }
-  soloSuggestionsEl.innerHTML = currentSoloSuggestions.map(([key,s],i)=>`
-    <div class="sugg-item" data-key="${key}" data-i="${i}">
-      <span class="sugg-name">${esc(s.display)}${s.flag?` ${s.flag}`:''}</span>
-      <span class="sugg-count">${s.count} tyee</span>
-    </div>
-  `).join('');
-  soloSuggestionsEl.classList.add('show');
-  $$('.sugg-item', soloSuggestionsEl).forEach(el=>{
-    el.addEventListener('click', ()=> selectSolo(el.dataset.key));
-  });
-}
-
-soloSearchInput.addEventListener('input', (e)=>{
-  soloClearBtn.classList.toggle('show', !!e.target.value);
-  doSoloSearch(e.target.value);
-});
-soloSearchInput.addEventListener('keydown', (e)=>{
-  if (!soloSuggestionsEl.classList.contains('show')) return;
-  if (e.key==='ArrowDown'){ e.preventDefault(); soloHlIndex = Math.min(soloHlIndex+1, currentSoloSuggestions.length-1); updateSoloHl(); }
-  else if (e.key==='ArrowUp'){ e.preventDefault(); soloHlIndex = Math.max(soloHlIndex-1, 0); updateSoloHl(); }
-  else if (e.key==='Enter'){ e.preventDefault(); if (currentSoloSuggestions[soloHlIndex]) selectSolo(currentSoloSuggestions[soloHlIndex][0]); else if(currentSoloSuggestions[0]) selectSolo(currentSoloSuggestions[0][0]); }
-});
-function updateSoloHl(){
-  $$('.sugg-item', soloSuggestionsEl).forEach((el,i)=> el.classList.toggle('hl', i===soloHlIndex));
-}
-soloClearBtn.addEventListener('click', ()=>{
-  soloSearchInput.value=''; soloClearBtn.classList.remove('show'); soloSuggestionsEl.classList.remove('show');
-  $('#soloProfile').classList.remove('show');
-  soloSearchInput.focus();
-});
-document.addEventListener('click', (e)=>{
-  if (!e.target.closest('#sec-solo .searchwrap')) soloSuggestionsEl.classList.remove('show');
-});
-
-function selectSolo(key){
-  const s = soloIndex.get(key);
-  if (!s) return;
-  soloSearchInput.value = s.display;
-  soloSuggestionsEl.classList.remove('show');
-  soloClearBtn.classList.add('show');
-  renderSoloProfile(key, s);
-}
-
-function renderSoloProfile(key, s){
-  const profile = $('#soloProfile');
-  profile.classList.add('show');
-  const avgW = s.weightCount ? (s.weight / s.weightCount) : null;
-  const minYear = s.years.length ? Math.min(...s.years) : null;
-  const maxYear = s.years.length ? Math.max(...s.years) : null;
-
-  const decadeCounts = {};
-  CATCHES.forEach(row=>{
-    if (row[7] && normalize(row[0])===key && normalize(row[7])===key && row[2]) decadeCounts[row[2]] = (decadeCounts[row[2]]||0)+1;
-  });
-
-  const variantNote = s.variants.size>1
-    ? `Recorded under ${s.variants.size} name variants in the ledger: ${Array.from(s.variants.keys()).join(', ')}`
-    : '';
-
-  const sortedCatches = s.catches.slice().sort((x,y)=> (x.date||'').localeCompare(y.date||''));
-
-  profile.innerHTML = `
-    <div class="profile-card">
-      <div class="profile-head">
-        <div>
-          <h2>${esc(s.display)}${s.flag?` ${s.flag}`:''}</h2>
-          ${variantNote ? `<div class="variants">${esc(variantNote)}</div>` : ''}
-        </div>
-      </div>
-      <div class="profile-stats">
-        <div class="pstat"><div class="num">${fmt(s.count)}</div><div class="lbl">Self-Guided Tyee</div></div>
-        <div class="pstat"><div class="num">${s.weightCount ? fmt1(s.weight)+' lb' : '—'}</div><div class="lbl">Combined Weight</div></div>
-        <div class="pstat"><div class="num">${avgW ? avgW.toFixed(1)+' lb' : '—'}</div><div class="lbl">Average Weight</div></div>
-        <div class="pstat"><div class="num">${minYear ? minYear+'–'+maxYear : '—'}</div><div class="lbl">Active Seasons</div></div>
-      </div>
-      <div class="decade-mini">
-        ${Object.keys(decadeCounts).sort().map(d=>`<div class="decade-chip">${esc(d)}: <b>${decadeCounts[d]}</b></div>`).join('')}
-      </div>
-      <div class="tablewrap">
-        <table class="catchtable">
-          <thead><tr><th>Date</th><th class="num">Weight</th><th>City / Prov</th><th>Lure</th></tr></thead>
-          <tbody>
-            ${sortedCatches.map(c=>`
-              <tr>
-                <td>${esc(c.date)||'—'}</td>
-                <td class="num">${c.weight!==null&&c.weight!==undefined ? c.weight.toFixed(1)+' lb' : '—'}</td>
-                <td>${esc([c.city,c.prov].filter(Boolean).join(', '))||'—'}</td>
-                <td>${esc(c.lure)||'—'}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  `;
-  profile.scrollIntoView && profile.scrollIntoView({behavior:'smooth', block:'nearest'});
-}
-
 /* ---------- leaderboards ---------- */
 function ledgerRows(container, pairs, opts={}){
   container.innerHTML = '';
@@ -2889,12 +2410,10 @@ function ledgerRows(container, pairs, opts={}){
 function buildLeaderboard(panelId, opts){
   // opts: { subjectType:'angler'|'guide', metric:'count'|'weight', note }
   const { subjectType, metric, note } = opts;
-  const index = subjectType==='guide' ? guideIndex : subjectType==='solo' ? soloIndex : anglerIndex;
+  const index = subjectType==='guide' ? guideIndex : anglerIndex;
   const clickable = true;
   const onSelect = subjectType==='guide'
     ? (key)=>{ const g = guideIndex.get(key); if (g){ gSearchInput.value = g.display; gClearBtn.classList.add('show'); renderGuideProfile(key, g); } }
-    : subjectType==='solo'
-    ? (key)=>{ const s = soloIndex.get(key); if (s){ soloSearchInput.value = s.display; soloClearBtn.classList.add('show'); renderSoloProfile(key, s); } }
     : (key)=>{ const a = anglerIndex.get(key); if (a){ searchInput.value = a.display; clearBtn.classList.add('show'); renderProfile(key, a); } };
   const panel = $('#'+panelId);
   panel.innerHTML = `
@@ -2973,7 +2492,7 @@ function buildLeaderboard(panelId, opts){
         const idx = index.get(key);
         const display = idx ? idx.display : key;
         const years = idx ? yearRangeLabel(idx.years) : '';
-        const flag = ((subjectType==='angler'||subjectType==='solo') && idx) ? idx.flag : '';
+        const flag = (subjectType==='angler' && idx) ? idx.flag : '';
         const verb = subjectType==='guide' ? 'rowed' : 'caught';
         if (metric==='pct'){
           const sub = `${v.nYears} yr${v.nYears===1?'':'s'} active \u00b7 ${fmt(v.ownCatches)} of ${fmt(v.rangeTotal)} tyee ${verb}`;
@@ -2995,7 +2514,7 @@ function buildLeaderboard(panelId, opts){
       const idx = index.get(key);
       const display = idx ? idx.display : key;
       const years = idx ? yearRangeLabel(idx.years) : '';
-      const flag = ((subjectType==='angler'||subjectType==='solo') && idx) ? idx.flag : '';
+      const flag = (subjectType==='angler' && idx) ? idx.flag : '';
       const val = metric==='weight' ? v.weight : v.count;
       const sub = metric==='weight' ? `${v.count} tyee \u00b7 avg ${(v.weightCount ? v.weight/v.weightCount : 0).toFixed(1)} lb` : null;
       return [display, val, key, sub, years, flag];
@@ -3027,7 +2546,6 @@ function initLbNav(navId){
 }
 initLbNav('lbTabs');
 initLbNav('guideLbTabs');
-initLbNav('soloLbTabs');
 
 buildLeaderboard('lb-angler-count', {subjectType:'angler', metric:'count', note:'Click any angler to see their full record.'});
 buildLeaderboard('lb-angler-weight', {subjectType:'angler', metric:'weight', note:'Click any angler to see their full record.'});
@@ -3037,11 +2555,6 @@ buildLeaderboard('lb-guide-pct', {subjectType:'guide', metric:'pct', note:`Each 
 buildLeaderboard('lb-guide-count', {subjectType:'guide', metric:'count', note:'Click any guide to see their full record.'});
 buildLeaderboard('lb-guide-weight', {subjectType:'guide', metric:'weight', note:'Click any guide to see their full record.'});
 buildLeaderboard('lb-guide-rate', {subjectType:'guide', metric:'rate', note:"Each guide's own catches ÷ their years active, assumed continuous from their first to their last registered catch — independent of how big or small a range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
-
-buildLeaderboard('lb-solo-count', {subjectType:'solo', metric:'count', note:'Catches where the angler and the recorded guide/rower are the same person. Click any name to see their full self-guided record.'});
-buildLeaderboard('lb-solo-weight', {subjectType:'solo', metric:'weight', note:'Click any name to see their full self-guided record.'});
-buildLeaderboard('lb-solo-pct', {subjectType:'solo', metric:'pct', note:`Each angler's self-guided catches over the range selected, divided by the total tyee registered across that whole range — the same denominator used for the angler and guide figures. "All-time" is out of all ${fmt(ALL_TOTAL)} registered tyee; a decade is out of that decade's total. "Years active" counts only years this angler registered a self-guided catch.`});
-buildLeaderboard('lb-solo-rate', {subjectType:'solo', metric:'rate', note:"Each angler's own self-guided catches ÷ their own years active in the range they registered one — independent of how big or small that range's overall catch pool is, so a partial or low-catch decade doesn't inflate the figure."});
 
 })();
 </script>
@@ -3067,21 +2580,6 @@ buildLeaderboard('lb-solo-rate', {subjectType:'solo', metric:'rate', note:"Each 
         weightInited = true;
         __initWeightSection();
       }
-    });
-  });
-})();
-
-// ===== Catch History sub-nav (Angler / Guide / Solo) — independent of the top-level tabs above =====
-(function(){
-  var subtabs = document.querySelectorAll('.catchhist-subtab');
-  var subsections = document.querySelectorAll('.catchhist-section');
-  subtabs.forEach(function(t){
-    t.addEventListener('click', function(){
-      var target = t.getAttribute('data-subtarget');
-      subtabs.forEach(function(x){ x.classList.remove('active'); });
-      subsections.forEach(function(s){ s.classList.remove('active'); });
-      t.classList.add('active');
-      document.getElementById(target).classList.add('active');
     });
   });
 })();
