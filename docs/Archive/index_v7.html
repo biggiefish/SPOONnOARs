@@ -1687,26 +1687,6 @@ footer.tyee-footer{
     <p class="ct-chart-note">Below ~3 knots the two lines are indistinguishable &mdash; consistent with committed anglers who don't care about a light breeze. Above that, catch-time hours fall increasingly short of the ambient rate: roughly half the relative rate by 6 knots, about a third by 8 knots. That's the shape of a safety cutoff, not a comfort preference. Wind speed itself has no independent effect on the size of fish caught (p=0.44) &mdash; its role here is purely on whether anyone's out on the water at all.</p>
   </div>
 
-  <!-- ============ SECTION 4: EFFORT SENSITIVITY (hypothetical) ============ -->
-  <div class="ct-sec-head">
-    <div class="ct-kicker">Sensitivity check &middot; hypothetical</div>
-    <h2>What if morning and evening effort aren't equal?</h2>
-    <p>Everything above compares catch-time conditions against the ambient rate for that same hour, so it doesn't depend on how much effort happens when. But the raw morning/evening catch split does &mdash; and it's worth asking what that split implies if fewer boats are actually out at dawn than at dusk. This section is a reasoning exercise laid over the existing catch counts, not a new data source: there's no direct effort record in the ledger, so treat it as a "what if," not a finding.</p>
-  </div>
-
-  <div class="ct-chart-card">
-    <div class="ct-chart-head">
-      <h3>Share of catches, morning vs. evening &mdash; raw vs. effort-adjusted</h3>
-      <div class="ct-chart-legend">
-        <span><span class="ct-swatch" style="background:#7C8A8C"></span>Raw catch share</span>
-        <span><span class="ct-swatch" style="background:var(--brass)"></span>If morning effort is 20% lower</span>
-      </div>
-    </div>
-    <div class="ct-chart-wrap"><canvas id="ctEffortChart"></canvas></div>
-    <p class="ct-chart-note">Before noon accounts for 1,655 of these 2,960 catches (56%) against 1,305 after noon (44%) &mdash; morning already leads on raw count. If that same catch total came from 20% less effort in the morning than the evening, the implied catch-rate gap is considerably larger than the raw split suggests: a <b>1.27:1</b> raw ratio becomes a <b>1.59:1</b> catch-rate ratio, and morning's share of total catch-<i>rate</i> (not catch count) rises from 56% to roughly 61%. At a 10% discount the ratio is 1.41:1; at 30% it's 1.81:1 &mdash; the more effort you assume evening carries, the more the morning bite looks like a genuinely better window, not just a busier one.</p>
-    <p class="ct-chart-note">Two things this <i>doesn't</i> change: the tide-direction residual from Layer 2 above moves from +1.9 to +2.0 points under the 20% assumption, and the overall mean weight moves from 36.47 to 36.49&nbsp;lb &mdash; both negligible, because those figures were already computed hour-by-hour rather than as a single morning/evening split. The effort assumption only really bites on the morning-vs-evening comparison itself, and it cuts against treating that split as a simple effort artifact: if evening really carries more effort and still lands fewer fish, the dawn advantage looks like it's about the fish, not the fleet.</p>
-  </div>
-
   <!-- ============ FINDINGS TABLE ============ -->
   <div class="ct-sec-head">
     <div class="ct-kicker">Summary</div>
@@ -1773,12 +1753,6 @@ footer.tyee-footer{
         <td>+0.12 lb per mm of preceding rain (p=0.035)</td>
         <td>Survives the full model, including year/season controls</td>
         <td><span class="ct-verdict tentative">Weak, tentative signal</span></td>
-      </tr>
-      <tr>
-        <td>Morning vs. evening effort</td>
-        <td>56% of catches before noon vs. 44% after (1.27:1)</td>
-        <td>Hypothetical only &mdash; assuming 20% less morning effort implies a 1.59:1 catch-rate ratio; no independent effort record exists to confirm it</td>
-        <td><span class="ct-verdict tentative">Unconfirmed, sensitivity check</span></td>
       </tr>
     </tbody>
   </table>
@@ -2417,11 +2391,6 @@ const CT_DATA = {
     thresholds: [0,1,2,3,4,5,6,7,8],
     ambient: [100,86.97,57.72,31.83,16.73,8.80,4.22,1.93,0.78],
     observed: [100,86.66,56.32,28.89,13.41,5.84,1.89,0.91,0.24]
-  },
-  effort: {
-    labels: ['Morning (before noon)', 'Evening (noon+)'],
-    raw_share: [55.9, 44.1],
-    adjusted_share: [61.3, 38.7]
   }
 };
 
@@ -2511,34 +2480,6 @@ new Chart(document.getElementById('ctWindChart'), {
     scales: {
       y: { type: 'logarithmic', title: { display: true, text: '% of hours exceeding threshold', color: '#8FA8AC', font: { family: 'IBM Plex Mono', size: 10.5 } }, ticks: { color: '#5C7377' }, grid: { color: 'rgba(236,227,208,0.06)' } },
       x: { title: { display: true, text: 'wind speed threshold', color: '#8FA8AC', font: { family: 'IBM Plex Mono', size: 10.5 } }, ticks: { color: '#8FA8AC', font: { family: 'IBM Plex Mono', size: 10.5 } }, grid: { display: false } }
-    }
-  }
-});
-
-/* ---------------- Effort sensitivity (morning vs evening) ---------------- */
-new Chart(document.getElementById('ctEffortChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Raw catch share', 'If morning effort is 20% lower'],
-    datasets: [
-      { label: 'Morning (before noon)', data: [CT_DATA.effort.raw_share[0], CT_DATA.effort.adjusted_share[0]], backgroundColor: '#CDA53A', stack: 's', borderRadius: 2, maxBarThickness: 70 },
-      { label: 'Evening (noon+)', data: [CT_DATA.effort.raw_share[1], CT_DATA.effort.adjusted_share[1]], backgroundColor: '#5B8C99', stack: 's', borderRadius: 2, maxBarThickness: 70 }
-    ]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    indexAxis: 'y',
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: '#ECE3D0', titleColor: '#0F1E23', bodyColor: '#0F1E23', borderWidth: 0,
-        titleFont: { family: 'IBM Plex Mono' }, bodyFont: { family: 'Inter' },
-        callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.x + '%' }
-      }
-    },
-    scales: {
-      x: { stacked: true, max: 100, ticks: { color: '#5C7377', callback: v => v + '%' }, grid: { color: 'rgba(236,227,208,0.06)' } },
-      y: { stacked: true, ticks: { color: '#8FA8AC', font: { family: 'IBM Plex Mono', size: 11 } }, grid: { display: false } }
     }
   }
 });
